@@ -1,0 +1,2 @@
+agent,commit_count,cpu_time_sec,errors,exported_at,fs_ops,retries,source_file,timestamp,wall_time_sec
+codex,0,385.2,0,2025-10-12T07:48:16.695437Z,142,1,codex_run_2025-10-12T06-47-25Z.json,2025-10-12T06:47:25Z,420.5

@@ -20,6 +20,12 @@ Construire un observatoire local où la théorie (policies, ADR) et la praxis (a
 3. Examiner `project-space/policies/routing.yaml` et `budgets.yaml` avant tout run.
 4. Collecter les métriques dans `project-space/benchmarks/results` après chaque session.
 
+### CI & observabilité
+- **pre-commit** : exécute les hooks `detect-secrets`, `gitleaks` et front-matter sur chaque PR vers `main`.
+- **secret-scan** : rejoue les scans de secrets (baseline + gitleaks) sur `push`/`PR` et chaque nuit (`05:00 UTC`).
+- **nightly-bench** : exporte les résultats en `JSONL`/`CSV`, génère les badges et publie les artefacts chaque nuit.
+- En environnement hors-ligne, utiliser `PATH=$PWD/tools/offline:$PATH pre-commit run --all-files --config security/pre-commit-config.yaml` pour rejouer les contrôles essentiels.
+
 ## Liens utiles
 - [Architecture](docs/ARCHITECTURE.md)
 - [Governance](docs/GOVERNANCE.md)
