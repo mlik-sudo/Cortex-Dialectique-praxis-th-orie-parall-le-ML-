@@ -14,6 +14,6 @@ repos:
     hooks:
       - id: require-front-matter
         name: Require front matter in docs
-        entry: bash -c 'python security/check_front_matter.py'
+        entry: bash -c 'python3 security/check_front_matter.py'
         language: system
         files: ^docs/.*\.md$

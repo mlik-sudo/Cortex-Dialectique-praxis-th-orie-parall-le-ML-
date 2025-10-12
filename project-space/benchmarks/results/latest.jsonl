@@ -1,1 +1,1 @@
-{"agent": "codex", "commit_count": 0, "cpu_time_sec": 385.2, "errors": 0, "exported_at": "2025-10-12T07:48:16.695437Z", "fs_ops": 142, "retries": 1, "source_file": "codex_run_2025-10-12T06-47-25Z.json", "timestamp": "2025-10-12T06:47:25Z", "wall_time_sec": 420.5}
+{"agent": "codex", "commit_count": 0, "cpu_time_sec": 0, "errors": 0, "exported_at": "2025-10-12T08:27:10Z", "fs_ops": 0, "retries": 0, "source_file": "codex_run_2025-10-12T08-27-10Z.json", "timestamp": "2025-10-12T08:27:10Z", "wall_time_sec": 0}
