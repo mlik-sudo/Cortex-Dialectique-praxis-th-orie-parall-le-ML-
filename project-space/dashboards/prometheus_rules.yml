@@ -9,3 +9,19 @@ groups:
         annotations:
           summary: "Codex agent error rate is elevated"
           description: "Investigate workflows causing sustained failures."
+
+      - alert: HighDriverConcurrency
+        expr: sum(max_over_time(task_active_gauge[1m])) by (driver) > 6
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Driver concurrency > 6 (5m)"
+
+      - alert: CometHighLatency
+        expr: histogram_quantile(0.95, sum(rate(comet_request_latency_seconds_bucket[5m])) by (le)) > 4
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Comet p95 latency > 4s (10m)"
