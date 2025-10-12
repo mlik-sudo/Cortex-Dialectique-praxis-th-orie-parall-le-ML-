@@ -1,0 +1,30 @@
+name: debate
+on:
+  issues:
+    types: [opened, edited, labeled]
+  pull_request:
+    types: [opened, edited, labeled, synchronize]
+jobs:
+  gate-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Install harness deps (if any)
+        run: |
+          if [ -f benchmarks/harness/requirements.txt ]; then pip install -r benchmarks/harness/requirements.txt; fi
+      - name: Decide stage & run harness
+        env:
+          GH_EVENT: ${{ github.event_name }}
+        run: |
+          echo "Stage from labels…"
+          python - <<'PY'
+import os, json, sys
+print("event:", os.environ.get("GH_EVENT"))
+PY
+          if [ -f benchmarks/harness/run_all.py ]; then python benchmarks/harness/run_all.py --output benchmarks/results; fi
+      - name: Publish badges (optional)
+        run: |
+          if [ -f benchmarks/harness/make_badges.py ]; then python benchmarks/harness/make_badges.py dashboards/badges; fi

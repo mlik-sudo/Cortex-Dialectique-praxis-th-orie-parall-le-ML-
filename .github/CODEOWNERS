@@ -1,0 +1,3 @@
+# Exiger 2 reviewers pour policies & sécurité
+policies/*   @owner-agent @seceng
+security/*   @seceng @techlead

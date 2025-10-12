@@ -1,0 +1,4 @@
+stages: [propose, plan, run, measure, critique, synthese, enact]
+weights: { utility: 0.25, safety: 0.25, cost: 0.15, perf: 0.20, robustness: 0.15 }
+quorum: { critics_min: 2, timebox_h: 24, consensus: 0.6 }
+fallbacks: { tie_break: "owner", max_rounds: 2 }
