@@ -1,0 +1,5 @@
+# Placeholder for rate limits, concurrency caps, and sandbox constraints.
+limits:
+  default:
+    sandbox: enabled
+    concurrency: 1

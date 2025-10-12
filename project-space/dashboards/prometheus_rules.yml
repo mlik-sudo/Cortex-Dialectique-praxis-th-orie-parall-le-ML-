@@ -1,0 +1,11 @@
+groups:
+  - name: codex-observatory
+    rules:
+      - alert: HighErrorRate
+        expr: rate(agent_errors_total[5m]) > 5
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Codex agent error rate is elevated"
+          description: "Investigate workflows causing sustained failures."

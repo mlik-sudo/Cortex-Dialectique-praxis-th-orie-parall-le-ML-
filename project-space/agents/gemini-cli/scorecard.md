@@ -1,0 +1,8 @@
+# Scorecard
+
+- **Agent:** gemini-cli
+- **Last Updated:** TBD
+- **Highlights:**
+  - Placeholder for key achievements.
+- **Next Metrics:**
+  - Placeholder for upcoming KPIs.
