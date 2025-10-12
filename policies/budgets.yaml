@@ -1,0 +1,4 @@
+budgets:
+  jules:  { tasks_per_day: 50,  hard_stop: true }
+  gemini: { rpm: 60, rpd: 1000, soft_stop: true }
+  codex:  { cpu_seconds: 7200, hard_stop: true }
