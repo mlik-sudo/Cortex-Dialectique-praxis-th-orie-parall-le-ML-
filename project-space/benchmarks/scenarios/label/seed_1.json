@@ -1,0 +1,21 @@
+{
+  "id": "label-seed-1",
+  "skill": "label",
+  "title": "Annotation QA spot-check",
+  "description": "Stub scenario to review a sample of annotations for consistency and quality.",
+  "entrypoint": {
+    "workflow": "label",
+    "inputs": {
+      "sample_size": "TODO: number of items",
+      "qa_guidelines": "TODO: reference doc"
+    }
+  },
+  "success_criteria": [
+    "Surface mismatched annotations",
+    "Capture QA notes for follow-up"
+  ],
+  "telemetry_expectations": {
+    "p95_loop_time_sec": null,
+    "notes": "Update after QA pipeline instrumentation."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "label-seed-2",
+  "skill": "label",
+  "title": "Guideline alignment workshop",
+  "description": "Stub scenario to synchronise labeler guidance with most recent policy updates.",
+  "entrypoint": {
+    "workflow": "label",
+    "inputs": {
+      "policy_digest": "TODO: digest file",
+      "training_material": "TODO: slides or doc"
+    }
+  },
+  "success_criteria": [
+    "Document outstanding clarifications",
+    "Log accepted changes back to governance"
+  ],
+  "telemetry_expectations": {
+    "p95_loop_time_sec": null,
+    "notes": "Capture after first workshop dry-run."
+  }
+}

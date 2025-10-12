@@ -1,0 +1,23 @@
+{
+  "id": "analyse-seed-1",
+  "skill": "analyse",
+  "title": "Policy drift scan",
+  "description": "Stub scenario to audit routing/budget policies for divergence against expected templates.",
+  "entrypoint": {
+    "workflow": "analyse",
+    "inputs": {
+      "policy_paths": [
+        "project-space/policies/routing.yaml",
+        "project-space/policies/budgets.yaml"
+      ]
+    }
+  },
+  "success_criteria": [
+    "Detect differences from golden templates",
+    "Emit summary report for maintainers"
+  ],
+  "telemetry_expectations": {
+    "p95_loop_time_sec": null,
+    "notes": "Record once comparison script is implemented."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "curate-seed-1",
+  "skill": "curate",
+  "title": "Dataset freshness audit",
+  "description": "Stub to evaluate if curated datasets meet freshness and coverage expectations.",
+  "entrypoint": {
+    "workflow": "curate",
+    "inputs": {
+      "dataset_id": "TODO: dataset name",
+      "freshness_threshold_days": "TODO: threshold"
+    }
+  },
+  "success_criteria": [
+    "Identify stale assets beyond threshold",
+    "Produce remediation checklist"
+  ],
+  "telemetry_expectations": {
+    "p95_loop_time_sec": null,
+    "notes": "Fill after initial curation loop."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "watch-seed-2",
+  "skill": "watch",
+  "title": "Alert review dry-run",
+  "description": "Placeholder scenario to validate alert triage cadence with simulated incidents.",
+  "entrypoint": {
+    "workflow": "watch",
+    "inputs": {
+      "alert_feed": "TODO: source channel",
+      "max_alerts": "TODO: window size"
+    }
+  },
+  "success_criteria": [
+    "Alerts triaged within configured SLA",
+    "Escalation path documented for at least one simulated incident"
+  ],
+  "telemetry_expectations": {
+    "p95_loop_time_sec": null,
+    "notes": "Calibrate once synthetic alerts are generated."
+  }
+}

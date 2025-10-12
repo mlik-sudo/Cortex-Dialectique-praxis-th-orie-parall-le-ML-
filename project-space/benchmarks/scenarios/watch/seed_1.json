@@ -1,0 +1,21 @@
+{
+  "id": "watch-seed-1",
+  "skill": "watch",
+  "title": "Telemetry heartbeat — baseline",
+  "description": "Stub scenario ensuring the observatory can poll basic heartbeat signals without side-effects.",
+  "entrypoint": {
+    "workflow": "watch",
+    "inputs": {
+      "target": "TODO: service identifier",
+      "interval_sec": "TODO: sampling cadence"
+    }
+  },
+  "success_criteria": [
+    "Heartbeat captured across one full interval",
+    "No critical alerts raised during sampling"
+  ],
+  "telemetry_expectations": {
+    "p95_loop_time_sec": null,
+    "notes": "Populate once first run is recorded."
+  }
+}
