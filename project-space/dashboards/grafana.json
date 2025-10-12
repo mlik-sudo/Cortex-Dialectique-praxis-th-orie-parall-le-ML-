@@ -1,0 +1,19 @@
+{
+  "title": "Codex Observatory",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Wall Time (p95)",
+      "targets": [
+        { "expr": "histogram_quantile(0.95, sum(rate(agent_wall_seconds_bucket[5m])) by (le))" }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Retries",
+      "targets": [
+        { "expr": "sum(increase(agent_retries_total[5m]))" }
+      ]
+    }
+  ]
+}
