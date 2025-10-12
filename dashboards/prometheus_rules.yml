@@ -1,0 +1,15 @@
+groups:
+- name: agent_performance
+  rules:
+  - record: agent:task_duration_seconds:p95
+    expr: histogram_quantile(0.95, sum(rate(task_duration_seconds_bucket[5m])) by (le, agent_name))
+    labels:
+      quantile: '0.95'
+  - alert: HighTaskErrorRate
+    expr: sum(rate(task_errors_total[5m])) by (agent_name) / sum(rate(task_calls_total[5m])) by (agent_name) > 0.1
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High task error rate for agent {{ $labels.agent_name }}"
+      description: "The error rate for agent {{ $labels.agent_name }} is over 10% for the last 10 minutes."

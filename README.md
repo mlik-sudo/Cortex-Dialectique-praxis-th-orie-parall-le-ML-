@@ -86,3 +86,11 @@ flowchart LR
 * *De la théorie à la praxis — et retour (en preuves).*
 * *Observe • Débat • Synthétise • Agit • Apprend.*
 * *Dialectic Control Plane for Multi‑Agent Workflows.*
+
+---
+
+## 8) Dashboards & Badges
+
+| Service           | Status                                                                    |
+| ----------------- | ------------------------------------------------------------------------- |
+| **Nightly Bench** | ![Nightly Benchmark Status](dashboards/badges/nightly_status.svg) |
