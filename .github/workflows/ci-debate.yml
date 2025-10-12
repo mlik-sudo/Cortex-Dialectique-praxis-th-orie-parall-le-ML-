@@ -28,3 +28,29 @@ PY
       - name: Publish badges (optional)
         run: |
           if [ -f benchmarks/harness/make_badges.py ]; then python benchmarks/harness/make_badges.py dashboards/badges; fi
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: detect-secrets
+        run: |
+          pip install detect-secrets
+          detect-secrets scan --baseline .secrets.baseline
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: urlchecker-action
+        uses: urlstechie/urlchecker-action@v1.1.0
+        with:
+          file_types: .md,.py,.rst
