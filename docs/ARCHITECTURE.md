@@ -1,7 +1,10 @@
 ---
+project: cortex-dialectique-ml
+owner: codex-cli
 title: "Architecture Overview"
 status: "draft"
 updated: "2025-10-12"
+reviewed: 2025-10-12
 ---
 
 # Architecture Overview
@@ -15,5 +18,5 @@ updated: "2025-10-12"
 - Benchmarks and telemetry recorded in `project-space/benchmarks`.
 
 ## Security Envelope
-- Local policies and hook configurations under `project-space/security`.
+- Local policies and hook configurations maintained in `security/`.
 - Detect-secrets baseline enforces zero-secret discipline.

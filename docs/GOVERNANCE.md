@@ -1,7 +1,10 @@
 ---
+project: cortex-dialectique-ml
+owner: codex-cli
 title: "Governance Charter"
 status: "draft"
 updated: "2025-10-12"
+reviewed: 2025-10-12
 ---
 
 # Governance Charter

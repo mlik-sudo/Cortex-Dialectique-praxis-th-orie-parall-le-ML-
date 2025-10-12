@@ -1,21 +1,10 @@
 {
-  "id": "curate-seed-2",
+  "id": "seed_curate_2",
   "skill": "curate",
-  "title": "Label taxonomy sync",
-  "description": "Stub to align dataset labels with the canonical taxonomy before distribution.",
-  "entrypoint": {
-    "workflow": "curate",
-    "inputs": {
-      "taxonomy_path": "TODO: taxonomy file",
-      "dataset_manifest": "TODO: manifest path"
-    }
-  },
-  "success_criteria": [
-    "Highlight label deltas",
-    "Draft follow-up actions for taxonomy updates"
-  ],
-  "telemetry_expectations": {
-    "p95_loop_time_sec": null,
-    "notes": "Document once taxonomy tooling is connected."
-  }
+  "input": { "source": "placeholder", "params": {} },
+  "oracle": { "type": "bool", "expected": true },
+  "tolerance": {},
+  "timeout_sec": 600,
+  "budget": { "tokens": 0, "cpu_seconds": 60 },
+  "drivers": ["driver_codex_cli","driver_jules","driver_gemini_cli"]
 }

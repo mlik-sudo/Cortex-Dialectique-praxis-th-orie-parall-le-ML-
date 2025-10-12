@@ -1,20 +1,10 @@
 {
-  "id": "analyse-seed-2",
+  "id": "seed_analyse_2",
   "skill": "analyse",
-  "title": "Benchmark variance review",
-  "description": "Stub scenario summarising benchmark variance between consecutive Codex runs.",
-  "entrypoint": {
-    "workflow": "analyse",
-    "inputs": {
-      "results_glob": "project-space/benchmarks/results/codex_run_*.json"
-    }
-  },
-  "success_criteria": [
-    "Compute delta for wall_time_sec and cpu_time_sec",
-    "Flag regressions beyond configured threshold"
-  ],
-  "telemetry_expectations": {
-    "p95_loop_time_sec": null,
-    "notes": "Populate once comparison harness exists."
-  }
+  "input": { "source": "placeholder", "params": {} },
+  "oracle": { "type": "bool", "expected": true },
+  "tolerance": {},
+  "timeout_sec": 600,
+  "budget": { "tokens": 0, "cpu_seconds": 60 },
+  "drivers": ["driver_codex_cli","driver_jules","driver_gemini_cli"]
 }

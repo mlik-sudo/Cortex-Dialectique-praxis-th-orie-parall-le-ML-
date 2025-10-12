@@ -16,15 +16,15 @@ Construire un observatoire local où la théorie (policies, ADR) et la praxis (a
 
 ## Démarrer
 1. Installer les hooks pré-commit (`pre-commit install && pre-commit install --hook-type pre-push`).
-2. Consulter `project-space/docs/ARCHITECTURE.md` pour la vue d’ensemble.
+2. Consulter `docs/ARCHITECTURE.md` pour la vue d’ensemble.
 3. Examiner `project-space/policies/routing.yaml` et `budgets.yaml` avant tout run.
 4. Collecter les métriques dans `project-space/benchmarks/results` après chaque session.
 
 ## Liens utiles
-- [Architecture](project-space/docs/ARCHITECTURE.md)
-- [Governance](project-space/docs/GOVERNANCE.md)
-- [ADR-0001](project-space/docs/ADR/ADR-0001.md)
-- [Security Policies](project-space/security/policies.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Governance](docs/GOVERNANCE.md)
+- [ADR-0001](docs/ADR/ADR-0001.md)
+- [Security Policies](security/policies.md)
 - [Benchmarks](project-space/benchmarks)
 
 ---
