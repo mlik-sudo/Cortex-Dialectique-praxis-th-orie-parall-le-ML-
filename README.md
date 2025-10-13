@@ -9,4 +9,4 @@ Orchestrateur multi-drivers (Codex, Jules, Gemini CLI, Claude Code, ChatGPT-5, C
 - `project-space/a2a/` — router v2 (policies, budgets, drivers, cards)
 - `project-space/benchmarks/` — scenarios, harness, results
 - `project-space/dashboards/` — prometheus_rules.yml, grafana.json, badges
-- `project-space/docs/` — ARCHITECTURE.md, GOVERNANCE.md, ADR/
+- `project-space/docs/` — ARCHITECTURE.md, GOVERNANCE.md, ADR/ 
