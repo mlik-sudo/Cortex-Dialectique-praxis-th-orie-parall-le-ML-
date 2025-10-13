@@ -9,7 +9,6 @@ groups:
         annotations:
           summary: "Codex agent error rate is elevated"
           description: "Investigate workflows causing sustained failures."
-
       - alert: HighDriverConcurrency
         expr: sum(max_over_time(task_active_gauge[1m])) by (driver) > 6
         for: 5m
@@ -17,7 +16,6 @@ groups:
           severity: warning
         annotations:
           summary: "Driver concurrency > 6 (5m)"
-
       - alert: CometHighLatency
         expr: histogram_quantile(0.95, sum(rate(comet_request_latency_seconds_bucket[5m])) by (le)) > 4
         for: 10m
@@ -25,3 +23,21 @@ groups:
           severity: warning
         annotations:
           summary: "Comet p95 latency > 4s (10m)"
+      # Taux d'échec CI (global)
+      - record: ci:failure_rate_5m
+        expr: sum(rate(github_actions_job_failures_total[5m])) / sum(rate(github_actions_job_runs_total[5m]))
+      - alert: CIHighFailureRate
+        expr: ci:failure_rate_5m > 0.15
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Taux d'échec CI > 15% (10m)"
+      # Nightly stale (pas d'artefact depuis 48h)
+      - alert: NightlyStale
+        expr: (time() - max(timestamp(nightly_bench_last_success_timestamp_seconds))) > 172800
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Aucun nightly bench réussi depuis 48h"
