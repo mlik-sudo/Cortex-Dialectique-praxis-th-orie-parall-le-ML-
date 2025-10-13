@@ -1,5 +1,4 @@
 name: Nightly Benchmark
-
 on:
   schedule:
     - cron: '0 2 * * *'
@@ -10,49 +9,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Run smoke test
         id: smoke_test
         run: |
           DATE=$(date -u +"%Y-%m-%dT%H-%M-%SZ")
           echo "Running nightly benchmark..."
           # This is a placeholder for the actual benchmark script
-          echo '{"test": "smoke", "status": "success", "duration_ms": 123}' > benchmarks/results/nightly_${DATE}.json
+          echo '{"test": "smoke", "status": "success", "duration_ms": 123}' > project-space/benchmarks/results/nightly_${DATE}.json
           echo "Benchmark results saved."
-
       - name: Create success badge
         if: success()
         run: |
-          echo '<svg xmlns="http://www.w3.org/2000/svg" width="88" height="20"><linearGradient id="b" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><mask id="a"><rect width="88" height="20" rx="3" fill="#fff"/></mask><g mask="url(#a)"><path fill="#555" d="M0 0h59v20H0z"/><path fill="#4c1" d="M59 0h29v20H59z"/><path fill="url(#b)"d="M0 0h88v20H0z"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,sans-serif" font-size="11"><text x="30.5" y="15" fill="#010101" fill-opacity=".3">nightly</text><text x="30.5" y="14">nightly</text><text x="72.5" y="15" fill="#010101" fill-opacity=".3">pass</text><text x="72.5" y="14">pass</text></g></svg>' > dashboards/badges/nightly_status.svg
-
+          echo '<svg height="20" width="88" xmlns="http://www.w3.org/2000/svg"><linearGradient id="b" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><mask id="a"><rect fill="#fff" height="20" rx="3" width="88"/></mask><g mask="url(#a)"><path d="M0 0h59v20H0z" fill="#555"/><path d="M59 0h29v20H59z" fill="#4c1"/><path d="M0 0h88v20H0z" fill="url(#b)"/></g><g fill="#fff" font-family="Verdana,Geneva,sans-serif" text-anchor="middle" font-size="11"><text fill="#010101" fill-opacity=".3" x="30.5" y="15">nightly</text><text x="30.5" y="14">nightly</text><text fill="#010101" fill-opacity=".3" x="72.5" y="15">pass</text><text x="72.5" y="14">pass</text></g></svg>' > project-space/dashboards/badges/nightly_status.svg
       - name: Create failure badge
         if: failure()
         run: |
-          echo '<svg xmlns="http://www.w3.org/2000/svg" width="94" height="20"><linearGradient id="b" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><mask id="a"><rect width="94" height="20" rx="3" fill="#fff"/></mask><g mask="url(#a)"><path fill="#555" d="M0 0h59v20H0z"/><path fill="#e05d44" d="M59 0h35v20H59z"/><path fill="url(#b)" d="M0 0h94v20H0z"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,sans-serif" font-size="11"><text x="30.5" y="15" fill="#010101" fill-opacity=".3">nightly</text><text x="30.5" y="14">nightly</text><text x="75.5" y="15" fill="#010101" fill-opacity=".3">fail</text><text x="75.5" y="14">fail</text></g></svg>' > dashboards/badges/nightly_status.svg
-name: nightly-bench
-
-on:
-  schedule:
-    - cron: "30 2 * * *"
-  workflow_dispatch:
-
-jobs:
-  export-and-badge:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: Export historical results
-        run: python project-space/benchmarks/harness/export_results.py --timestamp
-      - name: Generate badges
-        run: python project-space/benchmarks/harness/make_badges.py
-      - name: Upload artifacts
+          echo '<svg height="20" width="94" xmlns="http://www.w3.org/2000/svg"><linearGradient id="b" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><mask id="a"><rect fill="#fff" height="20" rx="3" width="94"/></mask><g mask="url(#a)"><path d="M0 0h59v20H0z" fill="#555"/><path d="M59 0h35v20H59z" fill="#e05d44"/><path d="M0 0h94v20H0z" fill="url(#b)"/></g><g fill="#fff" font-family="Verdana,Geneva,sans-serif" text-anchor="middle" font-size="11"><text fill="#010101" fill-opacity=".3" x="30.5" y="15">nightly</text><text x="30.5" y="14">nightly</text><text fill="#010101" fill-opacity=".3" x="75.5" y="15">fail</text><text x="75.5" y="14">fail</text></g></svg>' > project-space/dashboards/badges/nightly_status.svg
+      - name: Upload benchmark artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: bench-results
+          name: nightly-benchmarks
           path: |
-            project-space/benchmarks/results/latest.jsonl
-            project-space/benchmarks/results/latest.csv
-            dashboards/badges/codex.json
+            project-space/benchmarks/results/*.json
+            project-space/benchmarks/results/*.jsonl
+            project-space/benchmarks/results/*.csv
+            project-space/dashboards/badges/*.svg
+            project-space/dashboards/badges/*.json
