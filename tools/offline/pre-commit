@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+"""Minimal offline shim for running repository hooks."""
+
+from __future__ import annotations
+
+import argparse
+import pathlib
+import sys
+
+from security_scan import main as run_security
+
+ROOT = pathlib.Path(__file__).resolve().parent
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(prog="pre-commit")
+    subparsers = parser.add_subparsers(dest="command")
+
+    run_parser = subparsers.add_parser("run")
+    run_parser.add_argument("--all-files", action="store_true")
+    run_parser.add_argument("--config", default="security/pre-commit-config.yaml")
+
+    args = parser.parse_args()
+    if args.command != "run":
+        parser.error("only 'run' command is supported in offline mode")
+
+    # The shim ignores the config path but keeps signature compatibility.
+    return run_security([])
+
+
+if __name__ == "__main__":
+    sys.exit(main())

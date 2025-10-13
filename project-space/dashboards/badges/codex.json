@@ -1,0 +1,7 @@
+{
+  "agent": "codex",
+  "mean_cpu_time_sec": 385.2,
+  "mean_wall_time_sec": 420.5,
+  "p95_errors": 0,
+  "runs": 1
+}
