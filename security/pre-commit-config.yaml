@@ -1,0 +1,19 @@
+repos:
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        args: ["--baseline", "security/detect-secrets.baseline"]
+        stages: [commit]
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.2
+    hooks:
+      - id: gitleaks
+        stages: [commit, push]
+  - repo: local
+    hooks:
+      - id: require-front-matter
+        name: Require front matter in docs
+        entry: bash -c 'python3 security/check_front_matter.py'
+        language: system
+        files: ^docs/.*\.md$

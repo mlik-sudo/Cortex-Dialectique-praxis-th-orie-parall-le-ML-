@@ -1,11 +1,7 @@
 budgets:
-  jules:
-    tasks_per_day: 50
-    hard_stop: true
-  gemini:
-    rpm: 60
-    rpd: 1000
-    soft_stop: true
-  codex:
-    cpu_seconds: 7200
-    hard_stop: true
+  jules:   { tasks_per_day: 500,  hard_stop: true }
+  gemini:  { rpm: 120, rpd: 10000, soft_stop: true }
+  codex:   { cpu_seconds: 43200,  hard_stop: true }
+  claude:  { rpm: 120, rpd: 10000, soft_stop: true }
+  gpt5:    { rpm: 120, rpd: 10000, soft_stop: true }
+  comet:   { rpm: 120, rpd: 20000, soft_stop: true }

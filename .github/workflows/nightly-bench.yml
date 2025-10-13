@@ -1,0 +1,27 @@
+name: nightly-bench
+
+on:
+  schedule:
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  export-and-badge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Export historical results
+        run: python project-space/benchmarks/harness/export_results.py --timestamp
+      - name: Generate badges
+        run: python project-space/benchmarks/harness/make_badges.py
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-results
+          path: |
+            project-space/benchmarks/results/latest.jsonl
+            project-space/benchmarks/results/latest.csv
+            dashboards/badges/codex.json

@@ -1,0 +1,10 @@
+{
+  "id": "seed_label_1",
+  "skill": "label",
+  "input": { "source": "placeholder", "params": {} },
+  "oracle": { "type": "bool", "expected": true },
+  "tolerance": {},
+  "timeout_sec": 600,
+  "budget": { "tokens": 0, "cpu_seconds": 60 },
+  "drivers": ["driver_codex_cli","driver_jules","driver_gemini_cli"]
+}
