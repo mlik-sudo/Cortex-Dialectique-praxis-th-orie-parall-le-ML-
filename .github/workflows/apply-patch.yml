@@ -1,0 +1,33 @@
+name: apply-patch
+on:
+  workflow_dispatch:
+    inputs:
+      branch: { description: "Nom de branche", required: true, default: "feat/agent-patch" }
+      title:  { description: "Titre de la PR", required: true, default: "chore: agent patch" }
+      patch:  { description: "Patch unified diff (base64)", required: true }
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decode and apply patch
+        run: |
+          echo "${{ inputs.patch }}" | base64 -d > /tmp/agent.patch
+          git config user.name "agent-bot"
+          git config user.email "agent-bot@users.noreply.github.com"
+          git checkout -b "${{ inputs.branch }}"
+          git apply --whitespace=fix /tmp/agent.patch
+          git add -A
+          git commit -m "${{ inputs.title }}\n\nProject: cortex-dialectique-ml"
+      - name: Push branch
+        run: git push -u origin "${{ inputs.branch }}"
+      - name: Open PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          title: ${{ inputs.title }}
+          branch: ${{ inputs.branch }}
+          base: main
+          body: "PR ouverte par workflow *apply-patch*.\n\nProject: cortex-dialectique-ml"
