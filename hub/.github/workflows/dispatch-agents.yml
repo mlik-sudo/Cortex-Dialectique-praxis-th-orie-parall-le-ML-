@@ -1,0 +1,31 @@
+name: dispatch-agents
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths: ["requests/**"]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Install deps
+        run: pip install -r tools/requirements.txt || true
+      - name: Dispatch to agents (A2A or CLIs)
+        env:
+          A2A_BASE_URL: ${{ secrets.A2A_BASE_URL }}   # si tu appelles ton orchestrateur
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CODEX_API_KEY:  ${{ secrets.CODEX_API_KEY }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+        run: python tools/dispatch.py --request "$(git diff --name-only HEAD~1 | grep '^requests/' | head -n1)"
+      - name: Commit responses
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "actions@users.noreply.github.com"
+          git add responses/
+          git commit -m "chore(responses): add outputs for request" || echo "no changes"
+          git push

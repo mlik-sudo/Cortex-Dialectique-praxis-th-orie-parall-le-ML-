@@ -1,14 +1,18 @@
-# Router Stub (v2)
+# Orchestrateur A2A — Router v2 (stub)
 
-This directory will host the multi-driver router responsible for resolving skills
-to drivers while respecting routing preferences, budgets, and local execution
-timeouts.
+Sélection par `skill`, `size`, `context_tokens`, avec **policies/budgets**.
 
-## TODO
-- Flesh out driver registry hydration in `router.py`.
-- Implement budget ledger persistence across runs.
-- Add instrumentation hooks to feed benchmark metrics back into `benchmarks/results`.
+## Règles v0
+- run_and_fix_locally → driver_codex_cli (fallback: jules)
+- generate_tests (large) → jules → gemini_cli
+- watch + needs_fresh_web:true → comet → gemini_cli
+- défaut → gemini_cli
 
-## References
-- Policies: `project-space/policies/`
-- Security envelope: `project-space/security/`
+## Budgets (extrait)
+jules, gemini, codex, comet … (voir policies/*)
+
+## Sécurité
+écriture limitée au workdir; logs redacted.
+
+## Fichiers
+policies/{routing.yaml,budgets.yaml} · a2a/cards/*

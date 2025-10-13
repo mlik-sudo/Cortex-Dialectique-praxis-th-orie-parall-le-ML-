@@ -13,3 +13,8 @@ timeouts:
 retries:
   default_max_retries: 2
   comet_max_retries: 2
+# Placeholder for rate limits, concurrency caps, and sandbox constraints.
+limits:
+  default:
+    sandbox: enabled
+    concurrency: 1
