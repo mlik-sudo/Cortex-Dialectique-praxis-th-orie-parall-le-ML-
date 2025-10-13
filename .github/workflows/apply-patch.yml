@@ -2,9 +2,30 @@ name: apply-patch
 on:
   workflow_dispatch:
     inputs:
-      branch: { description: "Nom de branche", required: true, default: "feat/agent-patch" }
-      title:  { description: "Titre de la PR", required: true, default: "chore: agent patch" }
-      patch:  { description: "Patch unified diff (base64)", required: true }
+      mode:
+        description: "patch | create"
+        required: true
+        default: "create"
+      branch:
+        description: "Nom de branche"
+        required: true
+        default: "feat/comet-proof"
+      title:
+        description: "Titre de la PR"
+        required: true
+        default: "chore: agent proof (apply-patch)"
+      file:
+        description: "[mode=create] Chemin du fichier à créer/écraser"
+        required: false
+        default: "project-space/benchmarks/results/COMET_APPLY_PATCH_PROOF.txt"
+      content_b64:
+        description: "[mode=create] Contenu base64"
+        required: false
+        default: "SGVsbG8gZnJvbSBhcHBseS1wYXRjaAo="
+      patch_b64:
+        description: "[mode=patch] unified diff base64"
+        required: false
+
 jobs:
   apply:
     runs-on: ubuntu-latest
@@ -13,21 +34,40 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
-      - name: Decode and apply patch
+
+      - name: Configure git
         run: |
-          echo "${{ inputs.patch }}" | base64 -d > /tmp/agent.patch
           git config user.name "agent-bot"
           git config user.email "agent-bot@users.noreply.github.com"
-          git checkout -b "${{ inputs.branch }}"
+
+      - name: Create branch
+        run: git checkout -b "${{ inputs.branch }}"
+
+      - name: Apply (mode=create)
+        if: ${{ inputs.mode == 'create' }}
+        shell: bash
+        run: |
+          mkdir -p "$(dirname "${{ inputs.file }}")"
+          echo "${{ inputs.content_b64 }}" | base64 -d > "${{ inputs.file }}"
+          git add -A
+          git commit -m "${{ inputs.title }}"
+
+      - name: Apply (mode=patch)
+        if: ${{ inputs.mode == 'patch' }}
+        shell: bash
+        run: |
+          echo "${{ inputs.patch_b64 }}" | base64 -d > /tmp/agent.patch
           git apply --whitespace=fix /tmp/agent.patch
           git add -A
-          git commit -m "${{ inputs.title }}\n\nProject: cortex-dialectique-ml"
+          git commit -m "${{ inputs.title }}"
+
       - name: Push branch
         run: git push -u origin "${{ inputs.branch }}"
+
       - name: Open PR
         uses: peter-evans/create-pull-request@v6
         with:
           title: ${{ inputs.title }}
           branch: ${{ inputs.branch }}
           base: main
-          body: "PR ouverte par workflow *apply-patch*.\n\nProject: cortex-dialectique-ml"
+          body: "PR ouverte par workflow *apply-patch* (mode=${{ inputs.mode }})."
