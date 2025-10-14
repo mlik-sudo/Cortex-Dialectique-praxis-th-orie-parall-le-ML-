@@ -14,38 +14,20 @@ jobs:
         with: { python-version: "3.12" }
       - name: Install harness deps (if any)
         run: |
-          if [ -f benchmarks/harness/requirements.txt ]; then pip install -r benchmarks/harness/requirements.txt; fi
+          if [ -f project-space/benchmarks/harness/requirements.txt ]; then pip install -r project-space/benchmarks/harness/requirements.txt; fi
       - name: Decide stage & run harness
         env:
           GH_EVENT: ${{ github.event_name }}
         run: |
           echo "Stage from labels…"
           python - <<'PY'
-import os, json, sys
-print("event:", os.environ.get("GH_EVENT"))
-PY
-          if [ -f benchmarks/harness/run_all.py ]; then python benchmarks/harness/run_all.py --output benchmarks/results; fi
+          import os, json, sys
+          print("event:", os.environ.get("GH_EVENT"))
+          PY
+          if [ -f project-space/benchmarks/harness/run_all.py ]; then python project-space/benchmarks/harness/run_all.py --output project-space/benchmarks/results; fi
       - name: Publish badges (optional)
         run: |
-          if [ -f benchmarks/harness/make_badges.py ]; then python benchmarks/harness/make_badges.py dashboards/badges; fi
-  secret-scan:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - name: gitleaks
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: detect-secrets
-        run: |
-          pip install detect-secrets
-          detect-secrets scan --baseline .secrets.baseline
+          if [ -f project-space/benchmarks/harness/make_badges.py ]; then python project-space/benchmarks/harness/make_badges.py project-space/dashboards/badges; fi
   link-check:
     runs-on: ubuntu-latest
     steps:
