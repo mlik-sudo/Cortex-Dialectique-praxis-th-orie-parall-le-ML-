@@ -1,0 +1,3 @@
+# Ignore benchmark result artifacts except placeholder
+project-space/benchmarks/results/*
+!project-space/benchmarks/results/.gitkeep
