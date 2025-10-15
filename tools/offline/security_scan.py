@@ -124,7 +124,7 @@ def run_front_matter(paths: Sequence[str]) -> int:
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run offline security hooks")
-    parser.add_argument("--baseline", default="security/detect-secrets.baseline")
+    parser.add_argument("--baseline", default="project-space/security/detect-secrets.baseline")
     parser.add_argument("--include", nargs="*", default=list(DEFAULT_INCLUDE))
     parser.add_argument("--front-matter", nargs="*", default=["docs"])
     args = parser.parse_args(argv)
