@@ -6,6 +6,7 @@
 
 > De la théorie à l'expérience et de l'expérience à la théorie — en boucle.
 ![nightly](project-space/dashboards/badges/nightly.svg) ![secret-scan](project-space/dashboards/badges/secret-scan.svg)
+![Smoke](project-space/dashboards/badges/smoke.svg)
 
 ## Vision
 
