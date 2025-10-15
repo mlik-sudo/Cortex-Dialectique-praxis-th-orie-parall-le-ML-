@@ -1,7 +1,8 @@
 name: link-check
 on:
   pull_request:
-  push: { branches: [ "main" ] }
+  push:
+    branches: ["main"]
 jobs:
   lychee:
     runs-on: ubuntu-latest
