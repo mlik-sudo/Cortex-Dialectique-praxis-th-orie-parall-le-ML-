@@ -1,19 +1,9 @@
 {
-  "title": "Codex Observatory",
+  "title": "Cortex Bench (seed)",
+  "schemaVersion": 39,
   "panels": [
-    {
-      "type": "graph",
-      "title": "Wall Time (p95)",
-      "targets": [
-        { "expr": "histogram_quantile(0.95, sum(rate(agent_wall_seconds_bucket[5m])) by (le))" }
-      ]
-    },
-    {
-      "type": "stat",
-      "title": "Retries",
-      "targets": [
-        { "expr": "sum(increase(agent_retries_total[5m]))" }
-      ]
-    }
-  ]
+    { "type": "stat", "title": "Success rate (%)", "targets": [{ "expr": "bench_success_rate_percent" }] },
+    { "type": "stat", "title": "p95 (ms)", "targets": [{ "expr": "bench_duration_ms_p95" }] }
+  ],
+  "time": { "from": "now-7d", "to": "now" }
 }
