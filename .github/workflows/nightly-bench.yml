@@ -41,6 +41,22 @@ jobs:
           python project-space/benchmarks/harness/aggregate_metrics.py
           python project-space/benchmarks/harness/make_badges.py
 
+      - name: Print metrics to logs & summary
+        run: |
+          echo "### Nightly metrics" >> "$GITHUB_STEP_SUMMARY"
+          echo "summary.json:" | tee -a "$GITHUB_STEP_SUMMARY"
+          cat project-space/dashboards/metrics/summary.json | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "bench.prom:" | tee -a "$GITHUB_STEP_SUMMARY"
+          cat project-space/dashboards/metrics/bench.prom | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Regression guard
+        env:
+          SR_MIN: "80"
+          P95_MAX_MS: "1000"
+        run: |
+          python project-space/benchmarks/harness/regression_guard.py
+
       - name: Upload results & badges & metrics
         uses: actions/upload-artifact@v4
         with:
