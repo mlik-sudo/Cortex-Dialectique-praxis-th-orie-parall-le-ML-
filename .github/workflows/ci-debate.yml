@@ -43,10 +43,24 @@ jobs:
             echo "No harness found, skipping."
           fi
 
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-results
+          path: project-space/benchmarks/results
+
       - name: Publish badges (optional)
         run: |
           if [ -f project-space/benchmarks/harness/make_badges.py ]; then
-            python project-space/benchmarks/harness/make_badges.py project-space/dashboards/badges
+            python project-space/benchmarks/harness/make_badges.py
           else
             echo "No badge script, skipping."
           fi
+
+      - name: Upload badges
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-badges
+          path: project-space/dashboards/badges

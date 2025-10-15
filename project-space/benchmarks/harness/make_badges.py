@@ -1,58 +1,41 @@
 #!/usr/bin/env python3
-"""Create simple JSON badges summarizing benchmark runs."""
+import json, os, pathlib
 
-from __future__ import annotations
-
-import json
-import math
-import pathlib
-from statistics import mean
-from typing import List
-
-RESULTS_DIR = pathlib.Path(__file__).resolve().parent.parent / "results"
-BADGE_DIR = pathlib.Path(__file__).resolve().parents[2] / "dashboards" / "badges"
-
-
-def load_results() -> List[dict]:
-    payloads: List[dict] = []
-    for json_file in sorted(RESULTS_DIR.glob("*.json")):
-        try:
-            payloads.append(json.loads(json_file.read_text(encoding="utf-8")))
-        except json.JSONDecodeError:
+def compute_success_rate(lines):
+    total = 0
+    ok = 0
+    for ln in lines:
+        if not ln.strip():
             continue
-    return payloads
+        total += 1
+        try:
+            obj = json.loads(ln)
+            ok += 1 if obj.get("status") == "ok" else 0
+        except Exception:
+            pass
+    return 0 if total == 0 else int(100 * ok / total)
 
+def main():
+    indir = pathlib.Path("project-space/benchmarks/results")
+    badge_dir = pathlib.Path("project-space/dashboards/badges")
+    badge_dir.mkdir(parents=True, exist_ok=True)
 
-def summarize(payloads: List[dict]) -> dict:
-    if not payloads:
-        return {
-            "agent": "codex",
-            "runs": 0,
-            "mean_wall_time_sec": 0,
-            "mean_cpu_time_sec": 0,
-            "p95_errors": 0,
-        }
-    wall = [row.get("wall_time_sec", 0) for row in payloads]
-    cpu = [row.get("cpu_time_sec", 0) for row in payloads]
-    errors = sorted(row.get("errors", 0) for row in payloads)
-    p95_idx = min(len(errors) - 1, math.floor(0.95 * len(errors)))
-    return {
-        "agent": payloads[-1].get("agent", "codex"),
-        "runs": len(payloads),
-        "mean_wall_time_sec": round(mean(wall), 2) if wall else 0,
-        "mean_cpu_time_sec": round(mean(cpu), 2) if cpu else 0,
-        "p95_errors": errors[p95_idx] if errors else 0,
-    }
+    src = indir / "smoke_results.jsonl"
+    lines = src.read_text(encoding="utf-8").splitlines() if src.exists() else []
+    rate = compute_success_rate(lines)
 
-
-def main() -> int:
-    BADGE_DIR.mkdir(parents=True, exist_ok=True)
-    summary = summarize(load_results())
-    badge_path = BADGE_DIR / "codex.json"
-    badge_path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print(f"Wrote badge summary to {badge_path}.")
-    return 0
-
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="170" height="20" role="img" aria-label="smoke:{rate}%">
+<linearGradient id="a" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient>
+<rect rx="3" width="170" height="20" fill="#555"/>
+<rect rx="3" x="60" width="110" height="20" fill="#4c1"/>
+<path fill="#4c1" d="M60 0h4v20h-4z"/>
+<rect rx="3" width="170" height="20" fill="url(#a)"/>
+<g fill="#fff" text-anchor="start" font-family="DejaVu Sans,Verdana,Geneva" font-size="11">
+  <text x="6" y="14">smoke</text>
+  <text x="68" y="14">{rate}% pass</text>
+</g></svg>"""
+    (badge_dir / "smoke.svg").write_text(svg, encoding="utf-8")
+    print(f"badge: {badge_dir / 'smoke.svg'}")
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()
