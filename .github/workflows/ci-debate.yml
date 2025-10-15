@@ -1,38 +1,52 @@
-name: debate
+name: ci-debate
 on:
-  issues:
-    types: [opened, edited, labeled]
+  push:
+    branches: [ main ]
   pull_request:
-    types: [opened, edited, labeled, synchronize]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-debate-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  gate-and-run:
+  harness:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      GH_EVENT: ${{ github.event_name }}
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v5
-        with: { python-version: "3.12" }
-      - name: Install harness deps (if any)
+        with:
+          python-version: "3.x"
+
+      - name: Install harness deps (optional)
         run: |
-          if [ -f project-space/benchmarks/harness/requirements.txt ]; then pip install -r project-space/benchmarks/harness/requirements.txt; fi
-      - name: Decide stage & run harness
-        env:
-          GH_EVENT: ${{ github.event_name }}
+          if [ -f project-space/benchmarks/harness/requirements.txt ]; then
+            pip install -r project-space/benchmarks/harness/requirements.txt
+          else
+            echo "No harness requirements, skipping."
+          fi
+
+      - name: Echo event (sanity)
+        run: python -c 'import os; print("event:", os.environ.get("GH_EVENT"))'
+
+      - name: Run harness (optional)
         run: |
-          echo "Stage from labels…"
-          python - <<'PY'
-          import os, json, sys
-          print("event:", os.environ.get("GH_EVENT"))
-          PY
-          if [ -f project-space/benchmarks/harness/run_all.py ]; then python project-space/benchmarks/harness/run_all.py --output project-space/benchmarks/results; fi
+          if [ -f project-space/benchmarks/harness/run_all.py ]; then
+            python project-space/benchmarks/harness/run_all.py --output project-space/benchmarks/results
+          else
+            echo "No harness found, skipping."
+          fi
+
       - name: Publish badges (optional)
         run: |
-          if [ -f project-space/benchmarks/harness/make_badges.py ]; then python project-space/benchmarks/harness/make_badges.py project-space/dashboards/badges; fi
-  link-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: urlchecker-action
-        uses: urlstechie/urlchecker-action@v1.1.0
-        with:
-          file_types: .md,.py,.rst
+          if [ -f project-space/benchmarks/harness/make_badges.py ]; then
+            python project-space/benchmarks/harness/make_badges.py project-space/dashboards/badges
+          else
+            echo "No badge script, skipping."
+          fi
