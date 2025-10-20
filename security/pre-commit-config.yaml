@@ -1,15 +1,16 @@
 repos:
   - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.4.0
+    rev: v1.5.0
     hooks:
       - id: detect-secrets
         args: ["--baseline", "project-space/security/detect-secrets.baseline"]
-        stages: [commit]
+        exclude: project-space/security/detect-secrets.baseline
+        stages: [pre-commit]
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.18.2
+    rev: v8.28.0
     hooks:
       - id: gitleaks
-        stages: [commit, push]
+        stages: [pre-commit, pre-push]
   - repo: local
     hooks:
       - id: require-front-matter
