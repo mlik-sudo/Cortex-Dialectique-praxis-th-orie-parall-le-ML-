@@ -65,7 +65,7 @@ jobs:
         run: git push -u origin "${{ inputs.branch }}"
 
       - name: Open PR
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           title: ${{ inputs.title }}
           branch: ${{ inputs.branch }}
