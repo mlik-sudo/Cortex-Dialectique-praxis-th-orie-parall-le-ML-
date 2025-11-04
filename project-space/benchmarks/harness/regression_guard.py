@@ -1,12 +1,30 @@
 #!/usr/bin/env python3
-import argparse, json, pathlib, sys
+"""
+Regression guard that validates benchmark metrics against thresholds.
+"""
+import argparse
+import json
+import os
+import pathlib
+import sys
 
 SUMMARY = pathlib.Path("project-space/dashboards/metrics/summary.json")
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--sr-min", type=int, default=int((__import__("os").environ.get("SR_MIN", 80))))
-    ap.add_argument("--p95-max-ms", type=int, default=int((__import__("os").environ.get("P95_MAX_MS", 1000))))
+
+def main() -> None:
+    """
+    Validate benchmark metrics against configured thresholds.
+
+    Exit codes:
+        0: All thresholds met
+        1: Regression detected
+        2: Summary file not found
+    """
+    ap = argparse.ArgumentParser(description="Regression guard for benchmark metrics")
+    ap.add_argument("--sr-min", type=int, default=int(os.environ.get("SR_MIN", 80)),
+                    help="Minimum success rate percentage (default: 80)")
+    ap.add_argument("--p95-max-ms", type=int, default=int(os.environ.get("P95_MAX_MS", 1000)),
+                    help="Maximum 95th percentile duration in ms (default: 1000)")
     args = ap.parse_args()
 
     if not SUMMARY.exists():

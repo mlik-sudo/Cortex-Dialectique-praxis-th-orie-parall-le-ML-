@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-import json, statistics, pathlib
+"""
+Aggregate benchmark metrics from JSONL results into Prometheus and JSON formats.
+"""
+import json
+import pathlib
+import statistics
+from typing import List, Dict, Any
 
 RESULTS = pathlib.Path("project-space/benchmarks/results/smoke_results.jsonl")
 METRICS_DIR = pathlib.Path("project-space/dashboards/metrics")
@@ -7,19 +13,32 @@ METRICS_DIR.mkdir(parents=True, exist_ok=True)
 PROM = METRICS_DIR / "bench.prom"
 SUMMARY = METRICS_DIR / "summary.json"
 
-def read_rows():
+def read_rows() -> List[Dict[str, Any]]:
+    """Read and parse all rows from the smoke results JSONL file."""
     if not RESULTS.exists():
         return []
     return [json.loads(x) for x in RESULTS.read_text(encoding="utf-8").splitlines() if x.strip()]
 
-def p95(values):
+
+def p95(values: List[float]) -> int:
+    """
+    Calculate the 95th percentile of a list of values.
+
+    Args:
+        values: List of numeric values
+
+    Returns:
+        95th percentile as integer, or 0 if list is empty
+    """
     if not values:
         return 0
     values = sorted(values)
     k = max(0, int(0.95 * (len(values) - 1)))
     return int(values[k])
 
-def main():
+
+def main() -> None:
+    """Generate Prometheus metrics and JSON summary from benchmark results."""
     rows = read_rows()
     total = len(rows)
     oks = sum(1 for r in rows if r.get("status") == "ok")

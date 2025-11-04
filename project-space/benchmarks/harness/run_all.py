@@ -1,8 +1,16 @@
 #!/usr/bin/env python3
-import json, os, time, pathlib
+"""
+Benchmark harness runner that executes smoke tests and records results.
+"""
+import json
+import os
+import pathlib
+import time
 from datetime import datetime, timezone
 
-def main():
+
+def main() -> None:
+    """Execute smoke test and record results to JSONL format."""
     outdir = pathlib.Path(os.environ.get("OUTPUT_DIR", "project-space/benchmarks/results"))
     outdir.mkdir(parents=True, exist_ok=True)
     results_path = outdir / "smoke_results.jsonl"

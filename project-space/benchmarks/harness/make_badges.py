@@ -1,7 +1,22 @@
 #!/usr/bin/env python3
-import json, pathlib
+"""
+Generate SVG badges from benchmark results for visualization in README.
+"""
+import json
+import pathlib
+from typing import List
 
-def compute_success_rate(lines):
+
+def compute_success_rate(lines: List[str]) -> int:
+    """
+    Compute success rate from JSONL lines.
+
+    Args:
+        lines: List of JSONL strings
+
+    Returns:
+        Success rate as percentage (0-100)
+    """
     total = 0
     ok = 0
     for ln in lines:
@@ -16,14 +31,26 @@ def compute_success_rate(lines):
             pass
     return 0 if total == 0 else int(100 * ok / total)
 
-def color_for(rate):
+
+def color_for(rate: int) -> str:
+    """
+    Get badge color based on success rate.
+
+    Args:
+        rate: Success rate percentage (0-100)
+
+    Returns:
+        Hex color code
+    """
     if rate >= 80:
         return "#4c1"
     if rate >= 50:
         return "#fe7d37"
     return "#e05d44"
 
-def main():
+
+def main() -> None:
+    """Generate SVG badges from benchmark results."""
     indir = pathlib.Path("project-space/benchmarks/results")
     badge_dir = pathlib.Path("project-space/dashboards/badges")
     badge_dir.mkdir(parents=True, exist_ok=True)

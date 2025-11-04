@@ -1,8 +1,0 @@
-rules:
-  - when: { skill: "generate_tests", repo_size: "large" }
-    prefer: ["driver_jules", "driver_gemini_cli"]
-    max_wall_time_sec: 7200
-  - when: { skill: "run_and_fix_locally", os: "macos" }
-    prefer: ["driver_codex_cli"]
-fallbacks:
-  default: ["driver_codex_cli", "driver_gemini_cli"]

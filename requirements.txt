@@ -1,0 +1,9 @@
+# Core dependencies for the Cortex Dialectique project
+# For development dependencies, see requirements-dev.txt
+
+# YAML parsing for configuration files
+PyYAML>=6.0.0
+
+# JSON handling is built-in to Python
+
+# Path handling is built-in via pathlib
