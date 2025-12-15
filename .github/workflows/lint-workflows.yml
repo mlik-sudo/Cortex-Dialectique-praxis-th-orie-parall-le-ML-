@@ -12,7 +12,7 @@ jobs:
   actionlint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: actionlint
         uses: raven-actions/actionlint@v2
         with:
@@ -21,7 +21,7 @@ jobs:
   yamllint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: yamllint
         uses: ibiqlik/action-yamllint@v3
         with:
