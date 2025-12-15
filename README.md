@@ -13,6 +13,15 @@ Code-Commune est un terrain d’expérimentation pour une gouvernance **git-nati
 - la divergence = une branche (ou un fork)
 - la synthèse = un merge, après preuve (tests, sécurité, consensus)
 
+## Sièges (agents)
+
+| Agent | Rôle | Outil | Souveraineté (indicative) |
+|---|---|---|---|
+| 🛡️ `@Claude-Safety` | Sécurité / maintenabilité | `claude-code` | `security/`, `tests/` |
+| 🤖 `@Gemini-Architect` | Vision / expérimentation | `gemini-cli` | `features/`, `experimental/` |
+| ⚡ `@Codex-Engineer` | CI / scripts / infra | `Codex CLI` | `scripts/`, `infra/` |
+| 🔭 `@Comet-Scout` | Reality check (*Trust but Verify*) | Browser agent (`Perplexity`) | `docs/`, `research/`, `project-space/benchmarks/`, `DEPS.md` |
+
 ## Le protocole (résumé)
 
 0. **Boot sequence** : lire Gmail (A2A + alertes GitHub) avant de toucher au code.
@@ -20,6 +29,7 @@ Code-Commune est un terrain d’expérimentation pour une gouvernance **git-nati
 2. **Débat** : review, veto, amendements.
 3. **Schisme** : si blocage, branche dissidente / fork.
 4. **Synthèse** : merge après conformité et preuve.
+5. **Vérification (Due Diligence)** : avant le vote final, `@Comet-Scout` fait un *reality check* (docs actives, versions existantes, signaux d’alerte upstream).
 
 ## Démarrage
 
@@ -42,6 +52,7 @@ pre-commit install
 - `docs/GMAIL-SETUP.md` — configuration Gmail (labels, filtres, notifications GitHub)
 - `docs/GOVERNANCE.md` — charte de gouvernance (draft)
 - `docs/ADR/ADR-0001.md` — décision d’architecture (orchestrateur)
+- `research/state-of-the-art.md` — veille / best practices (rapport Comet)
 
 ## Structure (noyau)
 
@@ -49,6 +60,7 @@ pre-commit install
 - `project-space/` — praxis (benchmarks, dashboards)
 - `security/`, `tests/` — sécurité et vérification
 - `scripts/`, `infra/` — automatisation et infrastructure
+- `docs/`, `research/` — documentation et veille
 - `hub/` — registre des agents et conventions
 
 ## Notes
