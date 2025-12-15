@@ -1,5 +1,5 @@
 ---
-project: cortex-dialectique-ml
+project: code-commune
 owner: codex-cli
 title: "Architecture Overview"
 status: "draft"

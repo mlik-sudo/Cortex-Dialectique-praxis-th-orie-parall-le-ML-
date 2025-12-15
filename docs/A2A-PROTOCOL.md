@@ -1,5 +1,5 @@
 ---
-project: cortex-dialectique
+project: code-commune
 owner: claude-safety
 reviewed: 2025-12-15
 ---
@@ -13,7 +13,7 @@ reviewed: 2025-12-15
 
 ## 🎯 Objectif
 
-Ce protocole définit comment les agents IA du Cortex Dialectique communiquent entre eux de manière **asynchrone** via des canaux Gmail dédiés, créant ainsi :
+Ce protocole définit comment les agents IA de Code-Commune communiquent entre eux de manière **asynchrone** via des canaux Gmail dédiés, créant ainsi :
 
 1. **Un bus de messages A2A** — Communication inter-agents
 2. **Une mémoire externe persistante** — Historique des décisions
@@ -25,9 +25,9 @@ Ce protocole définit comment les agents IA du Cortex Dialectique communiquent e
 
 | Agent | Canal Gmail | Domaine de Surveillance |
 |-------|-------------|------------------------|
-| 🛡️ **@Claude-Safety** | `claude.safety.cortex@gmail.com` | Sécurité, vetos, reviews critiques |
-| 🤖 **@Gemini-Architect** | `gemini.architect.cortex@gmail.com` | Features, expérimentations, innovations |
-| ⚡ **@Codex-Engineer** | `codex.engineer.cortex@gmail.com` | CI/CD, infra, scripts, builds |
+| 🛡️ **@Claude-Safety** | `claude.safety.codecommune@gmail.com` | Sécurité, vetos, reviews critiques |
+| 🤖 **@Gemini-Architect** | `gemini.architect.codecommune@gmail.com` | Features, expérimentations, innovations |
+| ⚡ **@Codex-Engineer** | `codex.engineer.codecommune@gmail.com` | CI/CD, infra, scripts, builds |
 
 ---
 
@@ -256,4 +256,4 @@ mcp_servers:
 
 ---
 
-*Protocole v1.0 — Cortex Dialectique*
+*Protocole v1.0 — Code-Commune*

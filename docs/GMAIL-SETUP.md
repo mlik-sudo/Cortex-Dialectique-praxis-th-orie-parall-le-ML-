@@ -1,5 +1,5 @@
 ---
-project: cortex-dialectique
+project: code-commune
 owner: claude-safety
 reviewed: 2025-12-15
 ---
@@ -7,7 +7,7 @@ reviewed: 2025-12-15
 # 📧 Guide de Configuration Gmail
 ## Setup des Canaux Agents
 
-> **Checklist complète pour créer et configurer les boîtes Gmail du Parlement.**
+> **Checklist complète pour créer et configurer les boîtes Gmail de la Commune.**
 
 ---
 
@@ -26,16 +26,16 @@ Chaque agent IA dispose de son propre canal Gmail qui sert de :
 
 | Agent | Email Suggéré | Mot de passe |
 |-------|---------------|--------------|
-| 🛡️ Claude-Safety | `claude.safety.cortex@gmail.com` | Stocker dans gestionnaire sécurisé |
-| 🤖 Gemini-Architect | `gemini.architect.cortex@gmail.com` | Stocker dans gestionnaire sécurisé |
-| ⚡ Codex-Engineer | `codex.engineer.cortex@gmail.com` | Stocker dans gestionnaire sécurisé |
+| 🛡️ Claude-Safety | `claude.safety.codecommune@gmail.com` | Stocker dans gestionnaire sécurisé |
+| 🤖 Gemini-Architect | `gemini.architect.codecommune@gmail.com` | Stocker dans gestionnaire sécurisé |
+| ⚡ Codex-Engineer | `codex.engineer.codecommune@gmail.com` | Stocker dans gestionnaire sécurisé |
 
 ### Informations de Profil
 
 Pour chaque compte :
 ```
 Prénom: [Nom de l'Agent]
-Nom: Cortex
+Nom: Code-Commune
 Photo: Avatar distinctif par agent (optionnel)
 ```
 
@@ -107,7 +107,7 @@ Action:
 
 ```
 # Pour le compte de Claude :
-Correspond à: from:(gemini.architect.cortex@gmail.com OR codex.engineer.cortex@gmail.com)
+Correspond à: from:(gemini.architect.codecommune@gmail.com OR codex.engineer.codecommune@gmail.com)
 Action:
   - Appliquer le label: source/agent-gemini OU source/agent-codex
   - Ne jamais envoyer dans les spams
@@ -141,15 +141,15 @@ Action:
 
 1. **Email notifications** : Activer
 2. **Email address** : Mettre l'email de l'agent concerné
-3. **Watching** : Notifications pour le repo Cortex-Dialectique
+3. **Watching** : Notifications pour le repo Code-Commune
 
 ### Notifications par CODEOWNERS :
 
 | Domaine | Agent notifié |
 |---------|---------------|
-| `/core/*`, `/security/*`, `tests/` | claude.safety.cortex@gmail.com |
-| `/features/*`, `/experimental/*` | gemini.architect.cortex@gmail.com |
-| `/scripts/*`, `/infra/*` | codex.engineer.cortex@gmail.com |
+| `/core/*`, `/security/*`, `tests/` | claude.safety.codecommune@gmail.com |
+| `/features/*`, `/experimental/*` | gemini.architect.codecommune@gmail.com |
+| `/scripts/*`, `/infra/*` | codex.engineer.codecommune@gmail.com |
 
 ---
 
@@ -158,7 +158,7 @@ Action:
 ### Activer l'accès API (pour MCP futur)
 
 1. Aller dans **Google Cloud Console**
-2. Créer un projet `cortex-dialectique-agents`
+2. Créer un projet `code-commune-agents`
 3. Activer **Gmail API**
 4. Créer des **OAuth 2.0 credentials**
 5. Télécharger le fichier `credentials.json`
@@ -167,7 +167,7 @@ Action:
 
 ```bash
 # Structure recommandée (NE PAS COMMIT)
-~/.cortex-secrets/
+~/.code-commune-secrets/
 ├── claude-safety/
 │   ├── credentials.json
 │   └── token.json
@@ -183,9 +183,9 @@ Action:
 
 ```bash
 # .env (NE PAS COMMIT)
-CLAUDE_GMAIL_CREDENTIALS=~/.cortex-secrets/claude-safety/credentials.json
-GEMINI_GMAIL_CREDENTIALS=~/.cortex-secrets/gemini-architect/credentials.json
-CODEX_GMAIL_CREDENTIALS=~/.cortex-secrets/codex-engineer/credentials.json
+CLAUDE_GMAIL_CREDENTIALS=~/.code-commune-secrets/claude-safety/credentials.json
+GEMINI_GMAIL_CREDENTIALS=~/.code-commune-secrets/gemini-architect/credentials.json
+CODEX_GMAIL_CREDENTIALS=~/.code-commune-secrets/codex-engineer/credentials.json
 ```
 
 ---
@@ -206,7 +206,7 @@ Pour chaque compte Gmail :
 
 ### Test de Communication
 
-1. Envoyer un mail test de `claude.safety.cortex` vers `gemini.architect.cortex`
+1. Envoyer un mail test de `claude.safety.codecommune` vers `gemini.architect.codecommune`
 2. Vérifier que les labels s'appliquent correctement
 3. Vérifier que le mail n'est pas dans les spams
 
@@ -233,4 +233,4 @@ Pour chaque compte Gmail :
 
 ---
 
-*Guide v1.0 — Cortex Dialectique*
+*Guide v1.0 — Code-Commune*
