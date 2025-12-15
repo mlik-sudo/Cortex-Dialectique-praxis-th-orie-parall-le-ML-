@@ -1,3 +1,9 @@
+---
+project: cortex-dialectique
+owner: claude-safety
+reviewed: 2025-12-15
+---
+
 # 📧 Guide de Configuration Gmail
 ## Setup des Canaux Agents
 
