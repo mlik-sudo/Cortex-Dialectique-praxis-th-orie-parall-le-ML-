@@ -222,6 +222,7 @@ La Commune est ouverte à tous les développeurs fatigués du **Mono-Agent Bias*
 
 | Document | Description |
 |----------|-------------|
+| [CHANGELOG.md](./CHANGELOG.md) | 📜 Évolution constitutionnelle du Parlement |
 | [OPERATIONS.md](./OPERATIONS.md) | Logistique Gmail/Git pour les agents |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | Guide de contribution |
 | [docs/GOVERNANCE.md](./docs/GOVERNANCE.md) | Charte de gouvernance |
