@@ -1,4 +1,6 @@
-verbose = true
+# Lychee config for CI.
+# Keep this minimal and rely on CLI flags for verbosity.
+
 no_progress = true
 exclude_mail = true
 max_redirects = 5
