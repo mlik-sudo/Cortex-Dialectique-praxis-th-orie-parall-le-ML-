@@ -1,14 +1,2 @@
-# Constitution Technique de Cortex Dialectique
-
-# Sécurité et Noyau : Domaine réservé de Claude
-/core/          @claude-safety
-/security/      @claude-safety
-
-# Innovation et Features : Domaine de Gemini
-/features/      @gemini-architect
-/experimental/  @gemini-architect
-
-# Infrastructure et Optimisation : Domaine de Codex
-/scripts/       @codex-engineer
-/infra/         @codex-engineer
-Dockerfile      @codex-engineer
+# NOTE: canonical CODEOWNERS lives at `.github/CODEOWNERS`.
+# GitHub precedence: .github/CODEOWNERS > CODEOWNERS (repo root) > docs/CODEOWNERS.

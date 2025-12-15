@@ -108,22 +108,25 @@ cd Cortex-Dialectique-praxis-th-orie-parall-le-ML-
 
 ### 2. La Constitution (`CODEOWNERS`)
 
-Le fichier `.github/CODEOWNERS` définit les domaines de souveraineté :
+Le fichier `.github/CODEOWNERS` définit les domaines de souveraineté.
+
+> Note: `CODEOWNERS` doit référencer des comptes/teams GitHub réels. Les noms d'agents ci-dessus sont des personas.
 
 ```bash
-# Constitution Technique de Cortex Dialectique
+# Constitution Technique de Cortex Dialectique (exemple)
 
-# Sécurité et Noyau : Domaine réservé de Claude
-/core/          @claude-safety
-/security/      @claude-safety
+# Sécurité et Noyau : Domaine "Claude"
+/core/          @mlik-sudo
+/security/      @mlik-sudo
 
-# Innovation et Features : Domaine de Gemini
-/features/      @gemini-architect
-/experimental/  @gemini-architect
+# Innovation et Features : Domaine "Gemini"
+/features/      @mlik-sudo
+/experimental/  @mlik-sudo
 
-# Infrastructure et Optimisation : Domaine de Codex
-/scripts/       @codex-engineer
-Dockerfile      @codex-engineer
+# Infrastructure et Optimisation : Domaine "Codex"
+/scripts/       @mlik-sudo
+/infra/         @mlik-sudo
+Dockerfile      @mlik-sudo
 ```
 
 ### 3. Configuration Gmail (Canaux A2A)
@@ -139,7 +142,8 @@ Dockerfile      @codex-engineer
 | [Protocole A2A](docs/A2A-PROTOCOL.md) | Communication asynchrone entre agents via Gmail |
 | [Guide Setup Gmail](docs/GMAIL-SETUP.md) | Configuration des comptes et filtres Gmail |
 | [Registre des Agents](hub/AGENT-REGISTRY.md) | Fiches complètes des agents et contacts |
-| [CODEOWNERS](CODEOWNERS) | Constitution technique (domaines de souveraineté) |
+| [CODEOWNERS](.github/CODEOWNERS) | Constitution technique (domaines de souveraineté) |
+| [Policies](policies/README.md) | Règles (routing/budgets/limits) |
 
 ---
 
@@ -159,13 +163,15 @@ Le but final est de connecter les agents via le **Model Context Protocol (MCP)**
 .
 ├── core/           # 🛡️ @Claude-Safety — Noyau critique
 ├── security/       # 🛡️ @Claude-Safety — Politiques de sécurité
+├── policies/       # 📜 Théorie — rules/routing/budgets
 ├── features/       # 🤖 @Gemini-Architect — Nouvelles fonctionnalités
 ├── experimental/   # 🤖 @Gemini-Architect — Prototypes
-├── scripts/        # ⚡ @Codex-Engineer — Automatisation
+├── scripts/        # ⚡ @Codex-Engineer — Automatisation locale
 ├── infra/          # ⚡ @Codex-Engineer — Infrastructure
 ├── tests/          # 🛡️ @Claude-Safety — Tests de conformité
 ├── docs/           # 📚 Documentation (A2A, Gmail, etc.)
 ├── hub/            # 🏛️ Registre des agents et outils partagés
+├── project-space/  # 🧪 Praxis — benchmarks, dashboards, résultats
 └── deliberation/   # 🗳️ Archives des débats
 ```
 
