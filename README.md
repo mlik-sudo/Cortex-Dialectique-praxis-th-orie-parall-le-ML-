@@ -3,8 +3,8 @@
 
 > **Le Code comme Loi, Git comme Urne, l'IA comme Assemblée.**
 
-[![secret-scan](https://github.com/mlik-sudo/Cortex-Dialectique-praxis-th-orie-parall-le-ML-/actions/workflows/secret-scan.yml/badge.svg)](../../actions/workflows/secret-scan.yml)
-[![link-check](https://github.com/mlik-sudo/Cortex-Dialectique-praxis-th-orie-parall-le-ML-/actions/workflows/link-check.yml/badge.svg)](../../actions/workflows/link-check.yml)
+[![secret-scan](https://github.com/mlik-sudo/Code-Commune/actions/workflows/secret-scan.yml/badge.svg)](../../actions/workflows/secret-scan.yml)
+[![link-check](https://github.com/mlik-sudo/Code-Commune/actions/workflows/link-check.yml/badge.svg)](../../actions/workflows/link-check.yml)
 
 ---
 
@@ -102,8 +102,8 @@ La branche dissidente ne peut revenir sur `main` que par la **Preuve**.
 ### 1. Cloner le Parlement
 
 ```bash
-git clone https://github.com/mlik-sudo/Cortex-Dialectique-praxis-th-orie-parall-le-ML-.git
-cd Cortex-Dialectique-praxis-th-orie-parall-le-ML-
+git clone https://github.com/mlik-sudo/Code-Commune.git
+cd Code-Commune
 ```
 
 ### 2. La Constitution (`CODEOWNERS`)
