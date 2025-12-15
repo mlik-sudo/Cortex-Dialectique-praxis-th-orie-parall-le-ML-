@@ -228,7 +228,7 @@ Pour chaque compte Gmail :
 ## 🔗 Liens Utiles
 
 - [Gmail API Documentation](https://developers.google.com/gmail/api)
-- [MCP Server Gmail](https://github.com/anthropics/mcp-servers) (quand disponible)
+- [MCP Server Gmail](https://github.com/modelcontextprotocolserv/ers (quand disponible)
 - [Google Cloud Console](https://console.cloud.google.com/)
 
 ---
