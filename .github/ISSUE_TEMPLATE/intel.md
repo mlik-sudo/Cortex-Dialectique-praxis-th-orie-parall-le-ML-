@@ -8,8 +8,8 @@ assignees: []
 
 ## 🔭 Rapport de Veille Technologique
 
-**Agent**: @Comet-Scout  
-**Date**: <!-- YYYY-MM-DD -->  
+**Agent**: @Comet-Scout
+**Date**: <!-- YYYY-MM-DD -->
 **Priorité**: <!-- 🔴 Critique / 🟠 Haute / 🟡 Moyenne / 🟢 Basse -->
 
 ---

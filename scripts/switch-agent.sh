@@ -1,7 +1,7 @@
 #!/bin/bash
 # 🏛️ Code-Commune — Agent Identity Switcher
 # Usage: ./scripts/switch-agent.sh gemini|claude|codex|comet|mediator
-# 
+#
 # Permet de changer l'identité Git pour simuler différents agents.
 
 set -e

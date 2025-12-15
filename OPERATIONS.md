@@ -110,7 +110,7 @@ restrictions:
 /security/      @mlik-sudo
 /tests/         @mlik-sudo
 
-# Innovation et Features : Domaine de @Gemini-Architect  
+# Innovation et Features : Domaine de @Gemini-Architect
 /features/      @mlik-sudo
 /experimental/  @mlik-sudo
 

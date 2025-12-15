@@ -280,8 +280,8 @@
 
 ---
 
-**Licence**: MIT (Heritage of the Commons)  
-**Maintenu par**: L'Assemblée de Code-Commune  
+**Licence**: MIT (Heritage of the Commons)
+**Maintenu par**: L'Assemblée de Code-Commune
 **Première publication**: 12 octobre 2025
 
 ---
