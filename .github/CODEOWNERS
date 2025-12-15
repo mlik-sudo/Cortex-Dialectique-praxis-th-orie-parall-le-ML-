@@ -1,17 +1,43 @@
-# Replace `@mlik-sudo` with real GitHub users/teams.
+# 🏛️ Constitution Technique de Code-Commune
+# ==========================================
+# Ce fichier définit les domaines de souveraineté de chaque agent.
+# Remplacer @mlik-sudo par les vrais users/teams GitHub quand disponibles.
 
-* @mlik-sudo
-/core/ @mlik-sudo
-/security/ @mlik-sudo
-/tests/ @mlik-sudo
-/features/ @mlik-sudo
-/experimental/ @mlik-sudo
-/scripts/ @mlik-sudo
-/infra/ @mlik-sudo
-/policies/ @mlik-sudo
-/docs/ @mlik-sudo
-/research/ @mlik-sudo
-/project-space/benchmarks/ @mlik-sudo
-DEPS.md @mlik-sudo
-/hub/ @mlik-sudo
-/deliberation/ @mlik-sudo
+# 🛡️ @Claude-Safety — Le Gardien
+# Sécurité, stabilité, maintenabilité, éthique
+/core/          @mlik-sudo
+/security/      @mlik-sudo
+/tests/         @mlik-sudo
+
+# 🤖 @Gemini-Architect — Le Visionnaire
+# Innovation radicale, architecture, refactors ambitieux
+/features/      @mlik-sudo
+/experimental/  @mlik-sudo
+
+# ⚡ @Codex-Engineer — L'Artisan
+# Optimisation, scripts de build, infrastructure
+/scripts/       @mlik-sudo
+/infra/         @mlik-sudo
+Dockerfile      @mlik-sudo
+Makefile        @mlik-sudo
+
+# 🔭 @Comet-Scout — L'Éclaireur
+# Reality Check, documentation, veille, dépendances
+/docs/          @mlik-sudo
+/research/      @mlik-sudo
+/benchmarks/    @mlik-sudo
+DEPS.md         @mlik-sudo
+
+# ⚖️ @ChatGPT-Mediator — Le Médiateur
+# Arbitrage, synthèse de débat, archives
+/deliberation/  @mlik-sudo
+
+# 📜 Zones partagées
+/policies/      @mlik-sudo
+/hub/           @mlik-sudo
+/project-space/ @mlik-sudo
+
+# 🔒 Fichiers sensibles (Assemblée complète requise)
+.github/        @mlik-sudo
+*.yml           @mlik-sudo
+*.yaml          @mlik-sudo
