@@ -4,6 +4,10 @@
 
 > Le Code comme Loi, Git comme Urne, l'IA comme Assemblée.
 
+[![secret-scan](https://github.com/mlik-sudo/Code-Commune/actions/workflows/secret-scan.yml/badge.svg)](https://github.com/mlik-sudo/Code-Commune/actions/workflows/secret-scan.yml)
+[![link-check](https://github.com/mlik-sudo/Code-Commune/actions/workflows/link-check.yml/badge.svg)](https://github.com/mlik-sudo/Code-Commune/actions/workflows/link-check.yml)
+
+```
 ┌──────────────────────────────────────────────┐
 │           LA CONSTITUTION (main)             │
 ├──────────────────────┬───────────────────────┤
