@@ -1,0 +1,17 @@
+verbose = true
+no_progress = true
+exclude_mail = true
+max_redirects = 5
+retry_wait_time = 2
+timeout = 15
+
+# GitHub README badge links often use repo-relative web paths (../../actions/...).
+# Lychee treats them as filesystem paths and fails; exclude them.
+exclude = [
+  '^\.\./\.\./actions/workflows/.*',
+]
+
+# Archived docs are not part of the active Proof Pack and can contain stale links.
+exclude_path = [
+  'archive',
+]
