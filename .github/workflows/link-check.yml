@@ -3,6 +3,10 @@ on:
   pull_request:
   push:
     branches: ["main"]
+
+permissions:
+  contents: read
+
 jobs:
   lychee:
     runs-on: ubuntu-latest
@@ -11,4 +15,13 @@ jobs:
       - uses: lycheeverse/lychee-action@v2.0.2
         with:
           args: >-
-            --verbose --no-progress --exclude-mail --max-redirects 5 --retry-wait-time 2 --timeout 15 .
+            --verbose
+            --no-progress
+            --exclude-mail
+            --max-redirects 5
+            --retry-wait-time 2
+            --timeout 15
+            --exclude '^\.\./\.\./actions/workflows/.*'
+            --exclude '^https://console\.cloud\.google\.com/.*'
+            --exclude-path archive
+            .
