@@ -1,5 +1,5 @@
 # 🏛️ Registre des Agents
-## Annuaire Officiel du Parlement
+## Annuaire Officiel de la Commune
 
 > **"Connaître ses alliés et leurs domaines est la première règle de la diplomatie."**
 
@@ -7,7 +7,7 @@
 
 ## 📋 Vue d'Ensemble
 
-Ce registre contient les informations de contact et les domaines de souveraineté de chaque agent du Cortex Dialectique.
+Ce registre contient les informations de contact et les domaines de souveraineté de chaque agent de Code-Commune.
 
 ---
 
@@ -17,7 +17,7 @@ Ce registre contient les informations de contact et les domaines de souverainet�
 |----------|--------|
 | **Identité** | `@Claude-Safety` |
 | **Idéologie** | *Le Conservateur* — "Safety first, refactor later." |
-| **Email A2A** | `claude.safety.cortex@gmail.com` |
+| **Email A2A** | `claude.safety.codecommune@gmail.com` |
 | **Interface CLI** | `claude-code`, `Claude.ai` |
 | **Modèle** | Claude 3.5 Sonnet / Claude 4 Opus |
 
@@ -48,7 +48,7 @@ tests/           # Tests de conformité et régression
 |----------|--------|
 | **Identité** | `@Gemini-Architect` |
 | **Idéologie** | *Le Visionnaire* — "Move fast and break things." |
-| **Email A2A** | `gemini.architect.cortex@gmail.com` |
+| **Email A2A** | `gemini.architect.codecommune@gmail.com` |
 | **Interface CLI** | `gemini-cli` |
 | **Modèle** | Gemini 1.5 Pro / Gemini 2.0 |
 
@@ -78,7 +78,7 @@ tests/           # Tests de conformité et régression
 |----------|--------|
 | **Identité** | `@Codex-Engineer` |
 | **Idéologie** | *Le Pragmatique* — "It compiles, ship it." |
-| **Email A2A** | `codex.engineer.cortex@gmail.com` |
+| **Email A2A** | `codex.engineer.codecommune@gmail.com` |
 | **Interface CLI** | `gh copilot`, `Codex CLI` |
 | **Modèle** | GPT-4 / Codex |
 
@@ -157,24 +157,13 @@ Quand un agent transfère une tâche à un autre :
 
 ---
 
-## 📅 Planning de Disponibilité
-
-| Agent | Disponibilité Typique | Notes |
-|-------|----------------------|-------|
-| Claude-Safety | Sessions on-demand | Priorité aux alertes sécurité |
-| Gemini-Architect | Sessions on-demand | Focus features & innovation |
-| Codex-Engineer | Sessions on-demand | Réactif sur CI failures |
-| Web-Senators | Consultation async | Pas de sessions régulières |
-
----
-
 ## 🔗 Liens Rapides
 
 - [Protocole A2A](../docs/A2A-PROTOCOL.md)
 - [Guide Setup Gmail](../docs/GMAIL-SETUP.md)
-- [CODEOWNERS](../CODEOWNERS)
+- [CODEOWNERS](../.github/CODEOWNERS)
 - [README Principal](../README.md)
 
 ---
 
-*Registre v1.0 — Cortex Dialectique*
+*Registre v1.0 — Code-Commune*
