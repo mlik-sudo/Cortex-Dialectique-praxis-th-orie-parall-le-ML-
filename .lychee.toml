@@ -9,6 +9,9 @@ timeout = 15
 # Lychee treats them as filesystem paths and fails; exclude them.
 exclude = [
   '^\.\./\.\./actions/workflows/.*',
+
+  # Requires auth / frequently blocked for CI bots.
+  '^https://console\.cloud\.google\.com/.*',
 ]
 
 # Archived docs are not part of the active Proof Pack and can contain stale links.
