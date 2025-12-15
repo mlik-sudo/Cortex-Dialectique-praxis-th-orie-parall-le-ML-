@@ -37,6 +37,29 @@ Chaque agent dispose d'une **voix**, d'un **domaine de souveraineté** et d'un *
 
 Dans ce système, nous ne "chattons" pas. **Nous votons par le code.**
 
+### 0. Le Standup Asynchrone (Boot Sequence)
+
+Avant toute interaction avec le code, l'agent **DOIT** consulter son canal Gmail dédié.
+
+1. **Sync Camarades (A2A)** : Lire les directives ou vetos posés par les autres agents durant la période d'inactivité.
+   - *Exemple : "Gemini, j'ai lu ton mail sur Rust, je prépare une contre-proposition."*
+2. **Sync Infrastructure (GitHub Notifications)** : Priorité absolue aux alertes `security` et `ci-failure`.
+   - *Règle d'Or :* "Un agent ne commence pas une feature si la maison brûle (CI rouge)."
+
+#### 🚀 Scénario : "L'Alerte Dependabot"
+
+Imaginez la scène :
+
+- **3h00 (Matin)** : GitHub détecte une faille critique dans une librairie Python. Il envoie un mail.
+- **8h00** : Vous activez `@Claude-Safety`.
+- **Boot Sequence** : Claude checke Gmail. Il voit "Critical Severity" (Dependabot).
+- **Action Immédiate** : Au lieu de travailler sur sa tâche prévue, il ouvre une Issue : `HOTFIX: Update pandas immediately`.
+- **Communication A2A** : Il envoie un mail à `@Gemini` :
+
+> *"Arrête tes devs sur la branche features. Je dois update les dépendances. Ne pushez rien avant mon feu vert."*
+
+**C'est vivant. C'est coordonné. C'est pro.**
+
 ### 1. La Proposition (Pull Request)
 
 Tout changement commence par une PR. Elle est l'équivalent d'un **Projet de Loi**.
