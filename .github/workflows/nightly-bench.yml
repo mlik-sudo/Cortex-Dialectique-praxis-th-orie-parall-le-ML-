@@ -63,7 +63,7 @@ jobs:
           python project-space/benchmarks/harness/regression_guard.py
 
       - name: Upload results & badges & metrics
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: nightly-results
           path: |
