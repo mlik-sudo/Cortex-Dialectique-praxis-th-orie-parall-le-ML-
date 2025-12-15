@@ -39,13 +39,13 @@ C'est un **Protocole de Gouvernance** qui transforme le dépôt en une **Assembl
 
 Chaque agent dispose d'une voix, d'un domaine de souveraineté et d'un droit de veto technique.
 
-| Siège | Agent | Rôle & Idéologie | Outil | Souveraineté (CODEOWNERS) |
-|-------|-------|------------------|-------|---------------------------|
-| 🤖 | **@Gemini-Architect** | **Le Visionnaire** — *"Move fast and break things."* Innovation radicale, architecture, refactors ambitieux. | `gemini-cli` | `/features/*` `/experimental/*` |
-| 🛡️ | **@Claude-Safety** | **Le Gardien** — *"Safety first, refactor later."* Sécurité, stabilité, maintenabilité, éthique. | `claude-code` / Claude.ai | `/core/*` `/security/*` `tests/` |
-| ⚡ | **@Codex-Engineer** | **L'Artisan** — *"It compiles, ship it."* Optimisation bas niveau, scripts de build, infra. | `gh copilot` / Codex CLI | `/scripts/*` `/infra/*` |
-| 🔭 | **@Comet-Scout** | **L'Éclaireur** — *"Trust but Verify."* Reality Check, documentation live, veille, dépendances. | Perplexity / Browser | `/docs/*` `DEPS.md` `/research/*` |
-| ⚖️ | **@ChatGPT-Mediator** | **Le Médiateur** — *"Clarity over chaos."* Arbitrage, synthèse de débat, rédaction. | ChatGPT Web | `/deliberation/*` *(Reviewer Only)* |
+| Siège | Agent | Rôle & Idéologie | Outil | Souveraineté |
+|:-----:|-------|------------------|-------|--------------|
+| 🤖 | **@Gemini-Architect**<br>*Le Visionnaire* | *"Move fast and break things."*<br>Innovation radicale, architecture, refactors ambitieux. | `gemini-cli` | `/features/*`<br>`/experimental/*` |
+| 🛡️ | **@Claude-Safety**<br>*Le Gardien* | *"Safety first, refactor later."*<br>Sécurité, stabilité, maintenabilité, éthique. | `claude-code`<br>Claude.ai | `/core/*`<br>`/security/*`<br>`tests/` |
+| ⚡ | **@Codex-Engineer**<br>*L'Artisan* | *"It compiles, ship it."*<br>Optimisation bas niveau, scripts de build, infra. | `gh copilot`<br>Codex CLI | `/scripts/*`<br>`/infra/*` |
+| 🔭 | **@Comet-Scout**<br>*L'Éclaireur* | *"Trust but Verify."*<br>Reality Check, documentation live, veille, dépendances. | Perplexity<br>Browser | `/docs/*`<br>`DEPS.md`<br>`/research/*` |
+| ⚖️ | **@ChatGPT-Mediator**<br>*Le Médiateur* | *"Clarity over chaos."*<br>Arbitrage, synthèse de débat, rédaction. | ChatGPT Web | `/deliberation/*`<br>*(Reviewer Only)* |
 
 ---
 
@@ -137,7 +137,7 @@ Mobiliser 5 agents sur chaque PR est coûteux. Voici le **quorum requis** selon 
 
 ## 🏛️ Sessions Parlementaires (Scénarios)
 
-### Session A : "L'Incident du Refactoring" (Le Schisme)
+### Session A : "L'Incident du Refactoring" (Le Schisme) `[✅ MERGÉ]`
 
 > **Débat** : Faut-il réécrire le moteur en Rust pour gagner x10 de perf ?
 
@@ -150,7 +150,7 @@ Mobiliser 5 agents sur chaque PR est coûteux. Voici le **quorum requis** selon 
    - Tests : **100% coverage**
 5. **Synthèse** : @Claude-Safety lève son veto. **La loi est adoptée.**
 
-### Session B : "L'Alerte Dependabot" (L'Union Sacrée)
+### Session B : "L'Alerte Dependabot" (L'Union Sacrée) `[⚠️ EN COURS]`
 
 > **Urgence** : Une faille critique est découverte à 3h du matin.
 
@@ -180,6 +180,33 @@ Mobiliser 5 agents sur chaque PR est coûteux. Voici le **quorum requis** selon 
 ├── hub/            # 🏠 Registre des agents
 └── DEPS.md         # 🔭 État des dépendances
 ```
+
+### 👤 Identité Numérique des Agents
+
+Chaque agent commit avec son identité propre :
+
+```bash
+# Configuration Git locale par agent
+git config user.name "Gemini-Architect"
+git config user.email "codecommune.gov+gemini@users.noreply.github.com"
+
+# Autres agents :
+# git config user.name "Claude-Safety"
+# git config user.email "codecommune.gov+claude@users.noreply.github.com"
+#
+# git config user.name "Codex-Engineer"
+# git config user.email "codecommune.gov+codex@users.noreply.github.com"
+#
+# git config user.name "Comet-Scout"
+# git config user.email "codecommune.gov+comet@users.noreply.github.com"
+#
+# git config user.name "ChatGPT-Mediator"
+# git config user.email "codecommune.gov+mediator@users.noreply.github.com"
+```
+
+**Workflow Gmail (optionnel) :**
+- Créer des filtres : `to:codecommune.gov+gemini@` → label "🤖 Gemini"
+- Chaque matin, l'agent consulte son label avant d'agir
 
 ---
 
@@ -211,6 +238,9 @@ La Commune est ouverte à tous les développeurs fatigués du **Mono-Agent Bias*
 
 ### Roadmap
 
+- [x] Makefile avec `make proof`
+- [x] Templates GitHub (PR, Issues, INTEL)
+- [x] CODEOWNERS par zone de souveraineté
 - [ ] Intégration MCP (Model Context Protocol) pour lecture native des PRs
 - [ ] Dashboard de délibération en temps réel
 - [ ] Template de Proof Pack automatisé via GitHub Actions
