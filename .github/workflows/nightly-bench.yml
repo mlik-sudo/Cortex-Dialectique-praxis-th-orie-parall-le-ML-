@@ -26,13 +26,17 @@ jobs:
           key: pip-${{ hashFiles('**/requirements*.txt') }}
 
       - name: Install harness deps (optional)
+        shell: bash
         run: |
-          test -f project-space/benchmarks/harness/requirements.txt && \
-          pip install -r project-space/benchmarks/harness/requirements.txt || true
+          if [[ -f project-space/benchmarks/harness/requirements.txt ]]; then
+            pip install -r project-space/benchmarks/harness/requirements.txt || true
+          fi
 
       - name: Run harness (N=5)
+        shell: bash
         run: |
-          for i in $(seq 1 5); do
+          for i in 1 2 3 4 5; do
+            echo "Harness run ${i}/5"
             python project-space/benchmarks/harness/run_all.py || true
           done
 
@@ -42,13 +46,14 @@ jobs:
           python project-space/benchmarks/harness/make_badges.py
 
       - name: Print metrics to logs & summary
+        shell: bash
         run: |
           echo "### Nightly metrics" >> "$GITHUB_STEP_SUMMARY"
           echo "summary.json:" | tee -a "$GITHUB_STEP_SUMMARY"
-          cat project-space/dashboards/metrics/summary.json | tee -a "$GITHUB_STEP_SUMMARY"
+          tee -a "$GITHUB_STEP_SUMMARY" < project-space/dashboards/metrics/summary.json
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "bench.prom:" | tee -a "$GITHUB_STEP_SUMMARY"
-          cat project-space/dashboards/metrics/bench.prom | tee -a "$GITHUB_STEP_SUMMARY"
+          tee -a "$GITHUB_STEP_SUMMARY" < project-space/dashboards/metrics/bench.prom
 
       - name: Regression guard
         env:
