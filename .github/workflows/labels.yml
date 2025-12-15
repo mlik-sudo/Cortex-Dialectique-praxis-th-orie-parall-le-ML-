@@ -1,11 +1,14 @@
 name: seed-labels
 on:
   workflow_dispatch:
+
+permissions:
+  issues: write
+
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
       - uses: actions/github-script@v8
         with:
           script: |
@@ -13,7 +16,12 @@ jobs:
             for (const name of wanted) {
               try {
                 await github.rest.issues.createLabel({ owner: context.repo.owner, repo: context.repo.repo, name });
+                core.info(`Created label: ${name}`);
               } catch (e) {
-                if (e.status !== 422) core.info(`Label ${name} already exists`);
+                if (e.status === 422) {
+                  core.info(`Label already exists: ${name}`);
+                } else {
+                  throw e;
+                }
               }
             }
