@@ -1,16 +1,22 @@
 #!/usr/bin/env python3
-import json, statistics, pathlib
+import json
+import os
+import pathlib
+import statistics
 
-RESULTS = pathlib.Path("project-space/benchmarks/results/smoke_results.jsonl")
-METRICS_DIR = pathlib.Path("project-space/dashboards/metrics")
-METRICS_DIR.mkdir(parents=True, exist_ok=True)
-PROM = METRICS_DIR / "bench.prom"
-SUMMARY = METRICS_DIR / "summary.json"
+DEFAULT_RESULTS = pathlib.Path("project-space/benchmarks/results/smoke_results.jsonl")
+DEFAULT_METRICS_DIR = pathlib.Path("project-space/dashboards/metrics")
 
-def read_rows():
-    if not RESULTS.exists():
+
+def read_rows(results_path: pathlib.Path):
+    if not results_path.exists():
         return []
-    return [json.loads(x) for x in RESULTS.read_text(encoding="utf-8").splitlines() if x.strip()]
+    return [
+        json.loads(x)
+        for x in results_path.read_text(encoding="utf-8").splitlines()
+        if x.strip()
+    ]
+
 
 def p95(values):
     if not values:
@@ -19,12 +25,24 @@ def p95(values):
     k = max(0, int(0.95 * (len(values) - 1)))
     return int(values[k])
 
+
 def main():
-    rows = read_rows()
+    results_path = pathlib.Path(os.environ.get("BENCH_RESULTS_JSONL", str(DEFAULT_RESULTS)))
+    metrics_dir = pathlib.Path(os.environ.get("BENCH_METRICS_DIR", str(DEFAULT_METRICS_DIR)))
+
+    metrics_dir.mkdir(parents=True, exist_ok=True)
+    prom_path = metrics_dir / "bench.prom"
+    summary_path = metrics_dir / "summary.json"
+
+    rows = read_rows(results_path)
     total = len(rows)
     oks = sum(1 for r in rows if r.get("status") == "ok")
     fails = total - oks
-    durations = [r.get("duration_ms", 0) for r in rows if isinstance(r.get("duration_ms", 0), (int, float))]
+    durations = [
+        r.get("duration_ms", 0)
+        for r in rows
+        if isinstance(r.get("duration_ms", 0), (int, float))
+    ]
     avg_ms = int(statistics.mean(durations)) if durations else 0
     p95_ms = p95(durations)
 
@@ -36,7 +54,7 @@ def main():
         "avg_ms": avg_ms,
         "p95_ms": p95_ms,
     }
-    SUMMARY.write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    summary_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     lines = [
         "# HELP bench_results_total Total results in JSONL",
@@ -58,8 +76,9 @@ def main():
         "# TYPE bench_duration_ms_p95 gauge",
         f"bench_duration_ms_p95 {p95_ms}",
     ]
-    PROM.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print("metrics:", PROM, "summary:", SUMMARY)
+    prom_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print("metrics:", prom_path, "summary:", summary_path)
+
 
 if __name__ == "__main__":
     main()
