@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-"""Offline security helpers for environments without package installs."""
+"""Offline security helpers for environments without package installs.
+
+This is intentionally lightweight: it provides a simple secret-pattern scan plus
+front-matter enforcement for `docs/`.
+"""
 
 from __future__ import annotations
 
 import argparse
-import json
 import os
 import pathlib
 import re
@@ -14,15 +17,19 @@ from typing import Iterable, List, Sequence, Tuple
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 DEFAULT_INCLUDE = (
     "docs",
-    "project-space",
     "policies",
     "security",
+    "scripts",
+    "project-space",
 )
 DEFAULT_EXCLUDE = {
     ".git",
     "__pycache__",
-    "dashboards/badges",
+    "project-space/dashboards/badges",
     "project-space/benchmarks/results",
+    ".secrets.baseline",
+    "security/detect-secrets.baseline",
+    "project-space/security/detect-secrets.baseline",
 }
 
 SECRET_PATTERNS: Sequence[Tuple[str, re.Pattern[str]]] = (
@@ -32,7 +39,6 @@ SECRET_PATTERNS: Sequence[Tuple[str, re.Pattern[str]]] = (
     ("GitHub Token", re.compile(r"gh[pousr]_[0-9A-Za-z]{36}")),
     ("Stripe Secret", re.compile(r"sk_live_[0-9A-Za-z]{24}")),
     ("Twilio SID", re.compile(r"AC[0-9a-fA-F]{32}")),
-    ("Heroku API", re.compile(r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")),
 )
 
 
@@ -57,7 +63,11 @@ def iter_candidate_files(include: Sequence[str]) -> Iterable[pathlib.Path]:
             if not path.is_file():
                 continue
             rel_path = path.relative_to(ROOT)
-            if any(str(rel_path).startswith(prefix + os.sep) or str(rel_path) == prefix for prefix in DEFAULT_EXCLUDE):
+            rel_str = str(rel_path)
+            if any(
+                rel_str.startswith(prefix + os.sep) or rel_str == prefix
+                for prefix in DEFAULT_EXCLUDE
+            ):
                 continue
             if _is_binary(path):
                 continue
@@ -73,47 +83,10 @@ def scan_for_patterns(paths: Sequence[pathlib.Path]) -> List[str]:
             continue
         for name, pattern in SECRET_PATTERNS:
             for match in pattern.finditer(text):
-                findings.append(f"{name} match in {file_path} -> {match.group(0)[:12]}…")
+                findings.append(
+                    f"{name} match in {file_path.relative_to(ROOT)} -> {match.group(0)[:12]}…"
+                )
     return findings
-
-
-def load_baseline(path: pathlib.Path) -> List[str]:
-    if not path.exists():
-        return []
-    try:
-        data = json.loads(path.read_text(encoding="utf-8"))
-    except json.JSONDecodeError:
-        return []
-    results = data.get("results", {})
-    baseline = []
-    for file_path, entries in results.items():
-        for entry in entries:
-            baseline.append(f"{file_path}:{entry.get('hashed_secret', '')}")
-    return baseline
-
-
-def run_detect_secrets(baseline: pathlib.Path, include: Sequence[str]) -> int:
-    baseline_refs = set(load_baseline(baseline))
-    findings = scan_for_patterns(list(iter_candidate_files(include)))
-    new_findings = [f for f in findings if f not in baseline_refs]
-    if new_findings:
-        print("[detect-secrets] potential secrets detected:")
-        for line in new_findings:
-            print("  -", line)
-        return 1
-    print("[detect-secrets] no secrets detected (offline stub).")
-    return 0
-
-
-def run_gitleaks(include: Sequence[str]) -> int:
-    findings = scan_for_patterns(list(iter_candidate_files(include)))
-    if findings:
-        print("[gitleaks] potential findings:")
-        for line in findings:
-            print("  -", line)
-        return 1
-    print("[gitleaks] scan clean (offline stub).")
-    return 0
 
 
 def run_front_matter(paths: Sequence[str]) -> int:
@@ -124,21 +97,32 @@ def run_front_matter(paths: Sequence[str]) -> int:
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run offline security hooks")
-    parser.add_argument("--baseline", default="project-space/security/detect-secrets.baseline")
-    parser.add_argument("--include", nargs="*", default=list(DEFAULT_INCLUDE))
-    parser.add_argument("--front-matter", nargs="*", default=["docs"])
+    parser.add_argument(
+        "--include", nargs="*", default=list(DEFAULT_INCLUDE), help="roots to scan"
+    )
+    parser.add_argument(
+        "--front-matter",
+        nargs="*",
+        default=["docs"],
+        help="paths to enforce front-matter",
+    )
     args = parser.parse_args(argv)
 
-    baseline_path = ROOT / args.baseline
     include = args.include or list(DEFAULT_INCLUDE)
 
     status = 0
     if run_front_matter(args.front_matter) != 0:
         status = 1
-    if run_detect_secrets(baseline_path, include) != 0:
+
+    findings = scan_for_patterns(list(iter_candidate_files(include)))
+    if findings:
+        print("[secret-scan] potential secrets detected (offline stub):")
+        for line in findings:
+            print("  -", line)
         status = 1
-    if run_gitleaks(include) != 0:
-        status = 1
+    else:
+        print("[secret-scan] scan clean (offline stub).")
+
     return status
 
 

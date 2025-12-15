@@ -1,28 +1,5 @@
-rules:
-  - when: { skill: "watch", needs_fresh_web: true }
-    prefer: ["driver_comet", "driver_gpt5", "driver_gemini_cli"]
-    max_wall_time_sec: 180
-    budget_hint: { rpm: 120 }
+# DEPRECATED: canonical policies live in `/policies/`.
+# This file is kept only to avoid breaking external links.
 
-  - when: { skill: "run_and_fix_locally" }
-    prefer: ["driver_codex_cli", "driver_jules"]
-    max_wall_time_sec: 3600
-
-  - when: { skill: "generate_tests", repo_size: "large" }
-    prefer: ["driver_jules", "driver_gpt5", "driver_gemini_cli"]
-    max_wall_time_sec: 7200
-
-  - when: { skill: "analyse" }
-    prefer: ["driver_gpt5", "driver_claude_code", "driver_gemini_cli"]
-
-  - when: { skill: "curate" }
-    prefer: ["driver_claude_code", "driver_gpt5", "driver_gemini_cli"]
-
-  - when: { skill: "label" }
-    prefer: ["driver_jules", "driver_gpt5"]
-
-  - when: { skill: "run_and_fix_locally", os: "macos" }
-    prefer: ["driver_codex_cli"]
-
-fallbacks:
-  default: ["driver_gpt5", "driver_gemini_cli", "driver_claude_code", "driver_codex_cli", "driver_jules"]
+deprecated: true
+canonical: /policies/routing.yaml

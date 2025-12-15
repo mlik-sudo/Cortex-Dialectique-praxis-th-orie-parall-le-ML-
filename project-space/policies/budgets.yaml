@@ -1,7 +1,5 @@
-budgets:
-  jules:   { tasks_per_day: 500,  hard_stop: true }
-  gemini:  { rpm: 120, rpd: 10000, soft_stop: true }
-  codex:   { cpu_seconds: 43200,  hard_stop: true }
-  claude:  { rpm: 120, rpd: 10000, soft_stop: true }
-  gpt5:    { rpm: 120, rpd: 10000, soft_stop: true }
-  comet:   { rpm: 120, rpd: 20000, soft_stop: true }
+# DEPRECATED: canonical policies live in `/policies/`.
+# This file is kept only to avoid breaking external links.
+
+deprecated: true
+canonical: /policies/budgets.yaml

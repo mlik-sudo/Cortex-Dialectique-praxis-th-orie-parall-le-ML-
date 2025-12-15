@@ -10,7 +10,7 @@ reviewed: 2025-10-12
 # Architecture Overview
 
 ## Control Plane
-- Policies, governance, and routing rules stored under `project-space/policies`.
+- Policies, governance, and routing rules stored under `policies/`.
 - Observability assets collected in `project-space/dashboards`.
 
 ## Data Plane
@@ -18,5 +18,5 @@ reviewed: 2025-10-12
 - Benchmarks and telemetry recorded in `project-space/benchmarks`.
 
 ## Security Envelope
-- Local policies and hook configurations maintained in `security/`.
+- Canonical security tooling and baselines live under `security/`.
 - Detect-secrets baseline enforces zero-secret discipline.

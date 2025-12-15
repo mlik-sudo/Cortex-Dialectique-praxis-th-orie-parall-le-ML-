@@ -1,0 +1,21 @@
+concurrency:
+  comet_max_concurrency: 6
+  gemini_max_concurrency: 6
+  claude_max_concurrency: 6
+  gpt5_max_concurrency: 6
+  jules_max_concurrency: 8
+  codex_max_concurrency: 4
+
+timeouts:
+  default_timeout_sec: 20
+  comet_default_timeout_sec: 15
+
+retries:
+  default_max_retries: 2
+  comet_max_retries: 2
+
+# Placeholder for rate limits, concurrency caps, and sandbox constraints.
+limits:
+  default:
+    sandbox: enabled
+    concurrency: 1

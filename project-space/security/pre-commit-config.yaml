@@ -1,12 +1,5 @@
-repos:
-  - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.4.0
-    hooks:
-      - id: detect-secrets
-        args: ["--baseline", "project-space/security/detect-secrets.baseline"]
-        stages: [commit]
-  - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.18.2
-    hooks:
-      - id: gitleaks
-        stages: [commit, push]
+# DEPRECATED: use the repository root `.pre-commit-config.yaml`.
+# This file is kept only to avoid breaking external links.
+
+deprecated: true
+canonical: /.pre-commit-config.yaml

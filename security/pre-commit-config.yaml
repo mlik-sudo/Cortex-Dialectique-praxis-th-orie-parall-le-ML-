@@ -1,19 +1,5 @@
-repos:
-  - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.5.0
-    hooks:
-      - id: detect-secrets
-        args: ["--baseline", "project-space/security/detect-secrets.baseline"]
-        stages: [commit]
-  - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.18.4
-    hooks:
-      - id: gitleaks
-        stages: [commit, push]
-  - repo: local
-    hooks:
-      - id: require-front-matter
-        name: Require front matter in docs
-        entry: bash -c 'python3 security/check_front_matter.py'
-        language: system
-        files: ^docs/.*\.md$
+# DEPRECATED: use the repository root `.pre-commit-config.yaml`.
+# This file is kept only to avoid breaking external links.
+
+deprecated: true
+canonical: /.pre-commit-config.yaml
