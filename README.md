@@ -31,6 +31,8 @@ Chaque agent dispose d'une **voix**, d'un **domaine de souveraineté** et d'un *
 | ⚡ **@Codex-Engineer** | *Le Pragmatique* — "It compiles, ship it." Focalisé sur l'optimisation bas niveau, les scripts de build et l'efficacité. | `gh copilot` `Codex CLI` | `/scripts/*` `/infra/*` |
 | ⚖️ **@Web-Senators** | *Les Sages* — Consultants distants pour arbitrage et review contextuelle large. | `ChatGPT` `Claude Web` | Reviewer (No Merge Rights) |
 
+> 📋 **Voir le [Registre des Agents](hub/AGENT-REGISTRY.md)** pour les fiches complètes et contacts.
+
 ---
 
 ## ⚙️ Le Protocole Parlementaire
@@ -45,6 +47,8 @@ Avant toute interaction avec le code, l'agent **DOIT** consulter son canal Gmail
    - *Exemple : "Gemini, j'ai lu ton mail sur Rust, je prépare une contre-proposition."*
 2. **Sync Infrastructure (GitHub Notifications)** : Priorité absolue aux alertes `security` et `ci-failure`.
    - *Règle d'Or :* "Un agent ne commence pas une feature si la maison brûle (CI rouge)."
+
+> 📬 **Voir le [Protocole A2A](docs/A2A-PROTOCOL.md)** pour les formats de messages et labels.
 
 #### 🚀 Scénario : "L'Alerte Dependabot"
 
@@ -122,6 +126,21 @@ Le fichier `.github/CODEOWNERS` définit les domaines de souveraineté :
 Dockerfile      @codex-engineer
 ```
 
+### 3. Configuration Gmail (Canaux A2A)
+
+> 📧 **Voir le [Guide Setup Gmail](docs/GMAIL-SETUP.md)** pour la configuration complète.
+
+---
+
+## 📚 Documentation
+
+| Document | Description |
+|----------|-------------|
+| [Protocole A2A](docs/A2A-PROTOCOL.md) | Communication asynchrone entre agents via Gmail |
+| [Guide Setup Gmail](docs/GMAIL-SETUP.md) | Configuration des comptes et filtres Gmail |
+| [Registre des Agents](hub/AGENT-REGISTRY.md) | Fiches complètes des agents et contacts |
+| [CODEOWNERS](CODEOWNERS) | Constitution technique (domaines de souveraineté) |
+
 ---
 
 ## 🔮 Roadmap : Intégration MCP
@@ -130,7 +149,7 @@ Le but final est de connecter les agents via le **Model Context Protocol (MCP)**
 
 - [ ] Serveur MCP GitHub (Lecture/Écriture PRs)
 - [ ] Serveur MCP Terminal (Exécution de tests locaux)
-- [ ] Connecteur Gmail A2A (Communication asynchrone entre agents)
+- [x] Connecteur Gmail A2A (Communication asynchrone entre agents) — *Documenté*
 
 ---
 
@@ -145,8 +164,9 @@ Le but final est de connecter les agents via le **Model Context Protocol (MCP)**
 ├── scripts/        # ⚡ @Codex-Engineer — Automatisation
 ├── infra/          # ⚡ @Codex-Engineer — Infrastructure
 ├── tests/          # 🛡️ @Claude-Safety — Tests de conformité
-├── docs/           # 📚 Documentation partagée
-└── deliberation/   # 🏛️ Archives des débats
+├── docs/           # 📚 Documentation (A2A, Gmail, etc.)
+├── hub/            # 🏛️ Registre des agents et outils partagés
+└── deliberation/   # 🗳️ Archives des débats
 ```
 
 ---
