@@ -1,0 +1,56 @@
+name: proof-pack
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof-pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install test deps
+        run: pip install -r requirements-dev.txt
+
+      - name: Run harness
+        env:
+          OUTPUT_DIR: ${{ runner.temp }}/proof-pack/results
+        run: python project-space/benchmarks/harness/run_all.py
+
+      - name: Aggregate metrics
+        env:
+          BENCH_RESULTS_JSONL: ${{ runner.temp }}/proof-pack/results/smoke_results.jsonl
+          BENCH_METRICS_DIR: ${{ runner.temp }}/proof-pack/metrics
+        run: python project-space/benchmarks/harness/aggregate_metrics.py
+
+      - name: Regression guard
+        env:
+          BENCH_SUMMARY_JSON: ${{ runner.temp }}/proof-pack/metrics/summary.json
+          SR_MIN: "80"
+          P95_MAX_MS: "1000"
+        run: python project-space/benchmarks/harness/regression_guard.py
+
+      - name: Generate badge
+        env:
+          BENCH_RESULTS_JSONL: ${{ runner.temp }}/proof-pack/results/smoke_results.jsonl
+          BENCH_BADGES_DIR: ${{ runner.temp }}/proof-pack/badges
+        run: python project-space/benchmarks/harness/make_badges.py
+
+      - name: Upload proof-pack artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-pack
+          path: |
+            ${{ runner.temp }}/proof-pack/results
+            ${{ runner.temp }}/proof-pack/metrics
+            ${{ runner.temp }}/proof-pack/badges
