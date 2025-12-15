@@ -10,5 +10,8 @@
 /infra/ @mlik-sudo
 /policies/ @mlik-sudo
 /docs/ @mlik-sudo
+/research/ @mlik-sudo
+/project-space/benchmarks/ @mlik-sudo
+DEPS.md @mlik-sudo
 /hub/ @mlik-sudo
 /deliberation/ @mlik-sudo

@@ -104,6 +104,36 @@ Dockerfile       # Configuration conteneurs
 
 ---
 
+## 🔭 Comet-Scout
+
+| Attribut | Valeur |
+|----------|--------|
+| **Identité** | `@Comet-Scout` |
+| **Idéologie** | *L'Éclaireur* — "Trust but Verify." |
+| **Email A2A** | `comet.scout.codecommune@gmail.com` (suggestion) |
+| **Interface** | Browser agent (`Perplexity`) |
+| **Rôle** | Documentation live, fact-checking, veille, recherche de librairies |
+
+### Domaines de Souveraineté (`CODEOWNERS`)
+```
+/docs/*
+/research/*
+/project-space/benchmarks/*
+DEPS.md
+```
+
+### Responsabilités
+- Réaliser la **due diligence** avant vote/merge (liens, versions, activité upstream)
+- Dresser un rapport court et actionnable dans `research/`
+- Signaler les drapeaux rouges (projet déprécié, docs 404, issues critiques ouvertes)
+
+### Triggers d'Activation
+- PR proposant une nouvelle lib/outillage
+- Changements dans `DEPS.md`, `docs/`, `project-space/benchmarks/`
+- Demande explicite de "reality check" dans une PR
+
+---
+
 ## ⚖️ Web-Senators
 
 | Attribut | Valeur |
@@ -134,12 +164,13 @@ Reviewer only — NO MERGE RIGHTS
 
 ## 📊 Matrice de Communication
 
-| De / Vers | Claude | Gemini | Codex | Web-Senators |
-|-----------|--------|--------|-------|--------------|
-| **Claude** | — | Email A2A | Email A2A | Consultation |
-| **Gemini** | Email A2A | — | Email A2A | Consultation |
-| **Codex** | Email A2A | Email A2A | — | Consultation |
-| **Web-Senators** | PR Comment | PR Comment | PR Comment | — |
+| De / Vers | Claude | Gemini | Codex | Comet | Web-Senators |
+|-----------|--------|--------|-------|------|--------------|
+| **Claude** | — | Email A2A | Email A2A | Email A2A | Consultation |
+| **Gemini** | Email A2A | — | Email A2A | Email A2A | Consultation |
+| **Codex** | Email A2A | Email A2A | — | Email A2A | Consultation |
+| **Comet** | Email A2A | Email A2A | Email A2A | — | Consultation |
+| **Web-Senators** | PR Comment | PR Comment | PR Comment | PR Comment | — |
 
 ---
 
@@ -166,4 +197,4 @@ Quand un agent transfère une tâche à un autre :
 
 ---
 
-*Registre v1.0 — Code-Commune*
+*Registre v1.1 — Code-Commune*
