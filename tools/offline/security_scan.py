@@ -25,7 +25,7 @@ DEFAULT_INCLUDE = (
 DEFAULT_EXCLUDE = {
     ".git",
     "__pycache__",
-    "dashboards/badges",
+    "project-space/dashboards/badges",
     "project-space/benchmarks/results",
     "security/detect-secrets.baseline",
     "project-space/security/detect-secrets.baseline",
@@ -127,7 +127,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--include", nargs="*", default=list(DEFAULT_INCLUDE), help="roots to scan"
     )
     parser.add_argument(
-        "--front-matter", nargs="*", default=["docs"], help="paths to enforce front-matter"
+        "--front-matter",
+        nargs="*",
+        default=["docs"],
+        help="paths to enforce front-matter",
     )
     args = parser.parse_args(argv)
 
