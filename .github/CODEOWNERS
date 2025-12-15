@@ -1,13 +1,6 @@
-# Cortex Dialectique — CODEOWNERS (canonical)
-#
-# NOTE:
-# - The agent names in README (Claude-Safety, Gemini-Architect, Codex-Engineer) are personas.
-# - GitHub CODEOWNERS must reference real GitHub usernames or org teams.
-# - Replace `@mlik-sudo` with your actual maintainers/teams once they exist.
+# Replace `@mlik-sudo` with real GitHub users/teams.
 
 * @mlik-sudo
-
-# Domains of sovereignty (logical)
 /core/ @mlik-sudo
 /security/ @mlik-sudo
 /tests/ @mlik-sudo
